@@ -39,12 +39,12 @@ if __name__ =="__main__":
     classData.SplitData()
 
     
-    with open(f"PKL_Saved_Files/{args.dataset_name}_trained_model.pkl", "rb") as f:
+    with open(f"PKL_Saved_Files/margin1.5/{args.dataset_name}_trained_model.pkl", "rb") as f:
         all_models = pickle.load(f,encoding='latin1')
         
    
-    x_path = f"PKL_Saved_Files/{args.dataset_name}_X_test.npy"
-    y_path = f"PKL_Saved_Files/{args.dataset_name}_y_test.npy"
+    x_path = f"PKL_Saved_Files/margin1.5/{args.dataset_name}_X_test.npy"
+    y_path = f"PKL_Saved_Files/margin1.5/{args.dataset_name}_y_test.npy"
 
     if os.path.exists(x_path) and os.path.exists(y_path):
         X_test = np.load(x_path, allow_pickle=True)
@@ -60,7 +60,7 @@ if __name__ =="__main__":
     model = all_models[0]['models']  
     all_result = Test(X_test, y_test, model, args)
 
-    output_file = f"PKL_Saved_Files/{args.dataset_name}_accuracy_results.csv"
+    output_file = f"PKL_Saved_Files/margin1.5/{args.dataset_name}_accuracy_results.csv"
 
     num_exits = len(model.split_points)
 
@@ -141,6 +141,7 @@ if __name__ =="__main__":
 #     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
 #     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
 #     return p.parse_args()
+
 
 
 
