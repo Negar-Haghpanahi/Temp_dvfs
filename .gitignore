@@ -1,0 +1,4 @@
+echo "*.pkl" >> .gitignore
+echo "PKL_Saved_Files/" >> .gitignore
+git add .gitignore
+git commit -m "Ignore pickle model files"
