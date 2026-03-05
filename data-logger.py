@@ -14,7 +14,7 @@ ina.configure()
  
 header = ["time s", "power mW"]
 
-filename = "ACCGyro_Power.csv"
+filename = "PKL_Saved_Files/margin1.5/ACCGyro_Power.csv"
 
 data_all = []
  
