@@ -6,18 +6,16 @@ from test_Board import Test
 
 
 def parse_args():
-    
+        p = argparse.ArgumentParser()
+        p.add_argument("--dataset_name", type=str, default="Epilepsy")
+        p.add_argument("--n_est", type=int, default=80)
+        p.add_argument("--max_depth", type=int, default=20)
+        p.add_argument("--num_exits", type=int, default=3)
 
-    parser = argparse.ArgumentParser(description = "RF-H Inference")
-    parser.add_argument("--dataset_name", type=str, default= "Epilepsy", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int,default=26, help = "The number of estimators")
-    parser.add_argument("--max_depth", type=int, default=21, help = "The max depth")
-    parser.add_argument("--num_exits", type=int,  default=2 ,help = "The number of exits")
-    parser.add_argument("--tree_splits", type=list, default=[0.5, 1] ,help = "Tree splits")
-    parser.add_argument("--proportions", type=list, default=[0.25, 1] ,help = "Data proportions",  nargs="+")
-    parser.add_argument("--th_combination", type=list, default=[1.56], help = "Threshold combination", nargs="+")
-    
-    return parser.parse_args()
+        p.add_argument("--tree_splits", type=float, nargs="+", default=[0.31, 0.54, 1])
+        p.add_argument("--proportions", type=float, nargs="+", default=[0.39, 0.57, 1])   # split_points
+        p.add_argument("--th_combination", type=float, nargs="+", default=[0.34657359027997264, 1.3862943611198906])    # th_list
+        return p.parse_args()
 
 def write_content_to_file(file, content, header): 
     writer = csv.writer(file)
@@ -143,6 +141,7 @@ if __name__ =="__main__":
 #     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
 #     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
 #     return p.parse_args()
+
 
 
 
