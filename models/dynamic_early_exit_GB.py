@@ -23,7 +23,7 @@ def concat_time(X_acc, X_new):
     return np.concatenate([X_acc, X_new], axis=2)
 
 class DynamicEarlyExitRF:
-    def __init__(self, split_points, th_list, gamma_list, tree_splits_list, rf_params=None, factors=(1, 4 , 8, 64), start_factors=(1, 4 ,8, 64), default_start_factor=1):
+    def __init__(self, split_points, th_list, tree_splits_list, rf_params=None, factors=(1, 4 , 8, 64), start_factors=(1, 4 ,8, 64), default_start_factor=1):
         self.split_points = list(split_points)
         self.num_stages = len(self.split_points)
         self.th_list = list(th_list)
@@ -35,7 +35,7 @@ class DynamicEarlyExitRF:
         self.ctrl = EntropyGapController()
         self.rf_params = rf_params
         self.models = []
-        self.gamma_list = list(gamma_list)
+        self.gamma_list = None
         self.number_of_tress_per_forest = []
         allocated_trees = 0
         for k in range(len(self.tree_splits)):
