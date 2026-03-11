@@ -5,13 +5,18 @@ def Test(X_test, y_test, model, args):
 
     # number of exits = number of split points inside the wrapper
     num_exits = len(model.split_points)
-
+    n_classes = len(set(y_test))
+    
+    start_factor_state = model.default_start_factor
+    
     for w in range(len(X_test)):
         t_start = time.time()
 
-        pred, dbg = model.predict_one(X_test[w:w+1], sample_id=w, start_factor=1)
+        pred, dbg = model.predict_one(X_test[w:w+1], sample_id=w, start_factor=start_factor_state)
 
         t_end = time.time()
+        start_factor_state = int(model.next_start_factor_policy(dbg, n_classes))
+
         stages = dbg.get("stages", [])
         exit_level = stages[-1]["stage"] if stages else -1
 
