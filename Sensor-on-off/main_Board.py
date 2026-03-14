@@ -7,14 +7,14 @@ from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_
 
 def parse_args():
         p = argparse.ArgumentParser()
-        p.add_argument("--dataset_name", type=str, default="Shoaib")
-        p.add_argument("--n_est", type=int, default=75)
-        p.add_argument("--max_depth", type=int, default=70)
+        p.add_argument("--dataset_name", type=str, default="Epilepsy")
+        p.add_argument("--n_est", type=int, default=80)
+        p.add_argument("--max_depth", type=int, default=20)
         p.add_argument("--num_exits", type=int, default=3)
 
         p.add_argument("--tree_splits", type=float, nargs="+", default=[0.31, 0.54, 1])
         p.add_argument("--proportions", type=float, nargs="+", default=[0.39, 0.57, 1])   # split_points
-        p.add_argument("--th_combination", type=float, nargs="+", default=[0.48647753726382825, 1.945910149055313])    # th_list
+        p.add_argument("--th_combination", type=float, nargs="+", default=[0.34657359027997264, 1.3862943611198906])    # th_list
         return p.parse_args()
     
 
@@ -102,4 +102,142 @@ if __name__ =="__main__":
         add_header(f, header)
         write_content_to_file(f, all_result, header)
 
-    os.system("pkill -f 'python3 data_logger.py'")   
+    os.system("pkill -f 'python3 data-logger.py'")   
+
+
+
+# FOR GB:
+    # def parse_args():
+    #     p = argparse.ArgumentParser()
+    #     p.add_argument("--dataset_name", type=str, default="wisdm")
+    #     p.add_argument("--n_est", type=int, default=120)
+    #     p.add_argument("--max_depth", type=int, default=5)
+    #     p.add_argument("--num_exits", type=int, default=4)
+
+    #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
+    #     p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
+    #     p.add_argument("--th_combination", type=float, nargs="+", default=[0.44793, 1.34381, 0.89587])    # th_list
+    #     return p.parse_args()
+    
+    
+    
+    # def parse_args():
+    # p = argparse.ArgumentParser()
+    # p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
+    # p.add_argument("--n_est", type=int, default=120)
+    # p.add_argument("--max_depth", type=int, default=5)
+    # p.add_argument("--num_exits", type=int, default=4)
+
+    # p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
+    # p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
+    # p.add_argument("--th_combination", type=float, nargs="+", default=[0.5198603, 1.559581,1.03972])    # th_list
+    # return p.parse_args()
+
+
+# def parse_args():
+#     p = argparse.ArgumentParser()
+#     p.add_argument("--dataset_name", type=str, default="ACCGyro")
+#     p.add_argument("--n_est", type=int, default=150)
+#     p.add_argument("--max_depth", type=int, default=4)
+#     p.add_argument("--num_exits", type=int, default=4)
+#     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.47 ,0.59, 1])
+#     p.add_argument("--proportions", type=float, nargs="+", default=[0.3, 0.41 ,0.56, 1])   # split_points
+#     p.add_argument("--th_combination", type=float, nargs="+", default=[0.6931, 0.1732, 0.34657])    # th_list
+#     return p.parse_args()
+
+   # def parse_args():
+    #     p = argparse.ArgumentParser()
+    #     p.add_argument("--dataset_name", type=str, default="Epilepsy")
+    #     p.add_argument("--n_est", type=int, default=250)
+    #     p.add_argument("--max_depth", type=int, default=4)
+    #     p.add_argument("--num_exits", type=int, default=2)
+
+    #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.47, 1])
+    #     p.add_argument("--proportions", type=float, nargs="+", default=[0.36, 1])   # split_points
+    #     p.add_argument("--th_combination", type=float, nargs="+", default=[0.693147])    # th_list
+    #     return p.parse_args()
+    
+    #  def parse_args():
+    #     p = argparse.ArgumentParser()
+    #     p.add_argument("--dataset_name", type=str, default="Shoaib")
+    #     p.add_argument("--n_est", type=int, default=200)
+    #     p.add_argument("--max_depth", type=int, default=5)
+    #     p.add_argument("--num_exits", type=int, default=4)
+
+    #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
+    #     p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
+    #     p.add_argument("--th_combination", type=float, nargs="+", default=[0.4864, 1.45943, 0.9729550])    # th_list
+    #     return p.parse_args()
+    
+    
+    
+    
+    
+    
+    
+    # ===================================================================================================
+    # FOR RF
+    
+    
+    # def parse_args():
+    #     p = argparse.ArgumentParser()
+    #     p.add_argument("--dataset_name", type=str, default="Epilepsy")
+    #     p.add_argument("--n_est", type=int, default=80)
+    #     p.add_argument("--max_depth", type=int, default=20)
+    #     p.add_argument("--num_exits", type=int, default=3)
+
+    #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.31, 0.54, 1])
+    #     p.add_argument("--proportions", type=float, nargs="+", default=[0.39, 0.57, 1])   # split_points
+    #     p.add_argument("--th_combination", type=float, nargs="+", default=[0.34657359027997264, 1.3862943611198906])    # th_list
+    #     return p.parse_args()
+    
+    # def parse_args():
+    #     p = argparse.ArgumentParser()
+    #     p.add_argument("--dataset_name", type=str, default="Shoaib")
+    #     p.add_argument("--n_est", type=int, default=75)
+    #     p.add_argument("--max_depth", type=int, default=70)
+    #     p.add_argument("--num_exits", type=int, default=3)
+
+    #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.31, 0.54, 1])
+    #     p.add_argument("--proportions", type=float, nargs="+", default=[0.39, 0.57, 1])   # split_points
+    #     p.add_argument("--th_combination", type=float, nargs="+", default=[0.48647753726382825, 1.945910149055313])    # th_list
+    #     return p.parse_args()
+
+# def parse_args():
+#     p = argparse.ArgumentParser()
+#     p.add_argument("--dataset_name", type=str, default="ACCGyro")
+#     p.add_argument("--n_est", type=int, default=60)
+#     p.add_argument("--max_depth", type=int, default=60)
+#     p.add_argument("--num_exits", type=int, default=4)
+
+#     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.47 ,0.59, 1])
+#     p.add_argument("--proportions", type=float, nargs="+", default=[0.3, 0.41 ,0.57, 1])   # split_points
+#     p.add_argument("--th_combination", type=float, nargs="+", default=[0.6931471805599453, 0.17328679513998632, 0.34657359027997264])    # th_list
+#     return p.parse_args()
+
+
+# def parse_args():
+#     p = argparse.ArgumentParser()
+#     p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
+#     p.add_argument("--n_est", type=int, default=60)
+#     p.add_argument("--max_depth", type=int, default=15)
+#     p.add_argument("--num_exits", type=int, default=2)
+
+#     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33,  1])
+#     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1])   # split_points
+#     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
+#     return p.parse_args()
+
+
+
+# def parse_args():
+#     p = argparse.ArgumentParser()
+#     p.add_argument("--dataset_name", type=str, default="wisdm")
+#     p.add_argument("--n_est", type=int, default=60)
+#     p.add_argument("--max_depth", type=int, default=15)
+#     p.add_argument("--num_exits", type=int, default=2)
+
+#     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33 , 1.0])
+#     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
+#     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
+#     return p.parse_args()
