@@ -1,0 +1,8 @@
+[2026-03-14 14:25:04] [INFO] Logger initialized. Log file: Logs\TrainSaveBoard_20260314_142504.log
+[2026-03-14 14:25:38] [INFO] Model size summary:
+[2026-03-14 14:25:38] [INFO]   Total Nodes: 394,227
+[2026-03-14 14:25:38] [INFO]   Total Memory: 41578.63 KB
+[2026-03-14 14:25:38] [INFO]   Num Exits: 3
+[2026-03-14 14:25:38] [INFO]   Exit 1: 29,089 nodes, 3067.98 KB, 23 trees, depth=24.7
+[2026-03-14 14:25:38] [INFO]   Exit 2: 64,123 nodes, 6762.97 KB, 17 trees, depth=33.1
+[2026-03-14 14:25:38] [INFO]   Exit 3: 301,015 nodes, 31747.68 KB, 35 trees, depth=37.4
