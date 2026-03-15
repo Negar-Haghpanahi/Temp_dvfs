@@ -30,6 +30,8 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
     start_factor_state = model.default_start_factor
 
     for w in range(len(X_test)):
+
+        print(f"window is-->  {w}")
         if print_trace:
             print("\n" + "=" * 60)
             print(f"Window {w}")
