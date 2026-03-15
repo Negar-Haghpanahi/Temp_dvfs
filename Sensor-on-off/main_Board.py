@@ -11,10 +11,13 @@ def parse_args():
         p.add_argument("--n_est", type=int, default=80)
         p.add_argument("--max_depth", type=int, default=20)
         p.add_argument("--num_exits", type=int, default=3)
-
         p.add_argument("--tree_splits", type=float, nargs="+", default=[0.31, 0.54, 1])
         p.add_argument("--proportions", type=float, nargs="+", default=[0.39, 0.57, 1])   # split_points
-        p.add_argument("--th_combination", type=float, nargs="+", default=[0.34657359027997264, 1.3862943611198906])    # th_list
+        p.add_argument("--th_combination", type=float, nargs="+", default=[0.34657359027997264, 1.3862943611198906]) 
+        p.add_argument("--fs_base", type=float, default=20.0)
+        
+        p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
+        p.add_argument("--print_trace", action="store_true")
         return p.parse_args()
     
 
@@ -69,7 +72,7 @@ if __name__ =="__main__":
     # ------------------------------
     # Run board-controlled evaluation
     # ------------------------------
-    all_result = TestBoardControlled(X_test=X_test,y_test=y_test,model=model,args=args,sensor_on=sensor_on,sensor_sleep=sensor_sleep,fs_base=args.fs_base,window_len=window_len,sensor_wakeup_sec=None,print_trace=args.print_trace,)
+    all_result = TestBoardControlled(X_test=X_test,y_test=y_test,model=model,args=args,sensor_on=sensor_on,sensor_sleep=sensor_sleep,fs_base=args.fs_base,window_len=window_len,sensor_wakeup_sec=0.0,print_trace=args.print_trace,)
 
     output_file = (
         f"PKL_Saved_Files/margin1.5/RF/"
