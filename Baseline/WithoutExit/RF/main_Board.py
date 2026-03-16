@@ -9,6 +9,11 @@ def parse_args():
     p.add_argument("--n_est", type=int, default=80)
     p.add_argument("--max_depth", type=int, default=20)
     p.add_argument("--fs_base", type=float, required=True)
+    
+    p.add_argument("--fs_base", type=float, default=20.0)
+    p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
+    p.add_argument("--print_trace", action="store_true")
+    
     return p.parse_args()
 
 def write_content_to_file(file, content, header):
@@ -54,7 +59,7 @@ if __name__ == "__main__":
 
     finally:
         # sensor_sleep(verbose=True)
-        os.system("pkill -f 'python3 data_logger.py'")
+        os.system("pkill -f 'python3 data-logger.py'")
 
     output_file = f"Baseline/WithoutExit/RF/PKL_Saved_Files/{args.dataset_name}_accuracy_results_test.csv"
 
