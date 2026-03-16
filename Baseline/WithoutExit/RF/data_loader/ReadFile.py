@@ -148,7 +148,7 @@ class LoadData:
             print("Final y shape:", self.labels_array.shape)
             
         elif dataset_name == 'ACCGyro':   
-            CSV_PATH = r"C:\\Users\\negar.haghpanahi\\OneDrive - Washington State University (email.wsu.edu)\\WSU\\Fall2025-Semster2\\Research\\DVFS\\Dynamic_Early_Exit\\Code\\Baseline\\WithoutExit\\GB\\data_loader\\Datasets\\accelerometer_gyro_mobile_phone_dataset.csv"   # <-- change this
+            CSV_PATH = r"data_loader\\Datasets\\accelerometer_gyro_mobile_phone_dataset.csv"   # <-- change this
             WINDOW_SIZE = 128
             STRIDE = 64   # overlap allowed
 
@@ -208,7 +208,7 @@ class LoadData:
             
         else:    
             model_type = args.model_type
-            file_path =f'C:\\Users\\negar.haghpanahi\\OneDrive - Washington State University (email.wsu.edu)\\WSU\\Fall2025-Semster2\\Research\\DVFS\\Dynamic_Early_Exit\\Code\\Baseline\\WithoutExit\\GB\\data_loader\\Datasets\\{dataset_name}_dataLabels.pkl'
+            file_path =f'data_loader\\Datasets\\{dataset_name}_dataLabels.pkl'
             with open(file_path, 'rb') as file:
                 data_dict = pickle.load(file)
             self.data = data_dict['data']
