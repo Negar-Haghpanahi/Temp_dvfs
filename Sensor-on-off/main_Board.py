@@ -6,20 +6,20 @@ from test_Board import TestBoardControlled
 from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_sleep
 
 def parse_args():
-        p = argparse.ArgumentParser()
-        p.add_argument("--dataset_name", type=str, default="Epilepsy")
-        p.add_argument("--n_est", type=int, default=250)
-        p.add_argument("--max_depth", type=int, default=4)
-        p.add_argument("--num_exits", type=int, default=2)
+         p = argparse.ArgumentParser()
+         p.add_argument("--dataset_name", type=str, default="wisdm")
+         p.add_argument("--n_est", type=int, default=120)
+         p.add_argument("--max_depth", type=int, default=5)
+         p.add_argument("--num_exits", type=int, default=4)
 
-        p.add_argument("--tree_splits", type=float, nargs="+", default=[0.47, 1])
-        p.add_argument("--proportions", type=float, nargs="+", default=[0.36, 1])   # split_points
-        p.add_argument("--th_combination", type=float, nargs="+", default=[0.693147])    # th_list   
-   
-        p.add_argument("--fs_base", type=float, default=250.0)
-        p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
-        p.add_argument("--print_trace", action="store_true")
-        return p.parse_args()
+         p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
+         p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
+         p.add_argument("--th_combination", type=float, nargs="+", default=[0.44793, 1.34381, 0.89587])    # th_list
+    
+         p.add_argument("--fs_base", type=float, default=20.0)
+         p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
+         p.add_argument("--print_trace", action="store_true")
+         return p.parse_args()
     
 
 def write_content_to_file(file, content, header): 
@@ -76,7 +76,7 @@ if __name__ =="__main__":
     all_result = TestBoardControlled(X_test=X_test,y_test=y_test,model=model,args=args,sensor_on=sensor_on,sensor_sleep=sensor_sleep,fs_base=args.fs_base,window_len=window_len,sensor_wakeup_sec=0.0,print_trace=args.print_trace,)
 
     output_file = (
-        f"PKL_Saved_Files/margin1.5/RF/"
+        f"PKL_Saved_Files/margin1.5/GB/"
         f"{args.dataset_name}_accuracy_results_test.csv"
     )
 
@@ -106,7 +106,7 @@ if __name__ =="__main__":
         add_header(f, header)
         write_content_to_file(f, all_result, header)
 
-    os.system("pkill -f 'python3 data_logger.py'")   
+    os.system("pkill -f 'python3 data-logger.py'")   
 
 
 
