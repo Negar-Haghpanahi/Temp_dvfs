@@ -5,12 +5,11 @@ from sensor_control import initialize_bmi160, sensor_on, sensor_sleep
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--dataset_name", type=str, default="Epilepsy")
-    p.add_argument("--n_est", type=int, default=80)
-    p.add_argument("--max_depth", type=int, default=20)
-    p.add_argument("--fs_base", type=float, required=True)
+    p.add_argument("--dataset_name", type=str, default="ACCGyro")
+    p.add_argument("--n_est", type=int, default=60)
+    p.add_argument("--max_depth", type=int, default=60)
     
-    p.add_argument("--fs_base", type=float, default=20.0)
+    p.add_argument("--fs_base", type=float, default=10.0)
     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
     p.add_argument("--print_trace", action="store_true")
     
@@ -34,11 +33,11 @@ if __name__ == "__main__":
     classData.Read(args.dataset_name)
     classData.SplitData()
 
-    with open(f"Baseline/WithoutExit/RF/PKL_Saved_Files/{args.dataset_name}_trained_model.pkl", "rb") as f:
+    with open(f"PKL_Saved_Files/{args.dataset_name}_trained_model.pkl", "rb") as f:
         all_models = pickle.load(f, encoding="latin1")
 
-    x_path = f"Baseline/WithoutExit/RF/PKL_Saved_Files/{args.dataset_name}_X_test.npy"
-    y_path = f"Baseline/WithoutExit/RF/PKL_Saved_Files/{args.dataset_name}_y_test.npy"
+    x_path = f"PKL_Saved_Files/{args.dataset_name}_X_test.npy"
+    y_path = f"PKL_Saved_Files/{args.dataset_name}_y_test.npy"
 
     if os.path.exists(x_path) and os.path.exists(y_path):
         X_test = np.load(x_path, allow_pickle=True)
@@ -61,7 +60,7 @@ if __name__ == "__main__":
         # sensor_sleep(verbose=True)
         os.system("pkill -f 'python3 data-logger.py'")
 
-    output_file = f"Baseline/WithoutExit/RF/PKL_Saved_Files/{args.dataset_name}_accuracy_results_test.csv"
+    output_file = f"PKL_Saved_Files/{args.dataset_name}_accuracy_results.csv"
 
     header = [
         "t_start", "t_end", "total",
