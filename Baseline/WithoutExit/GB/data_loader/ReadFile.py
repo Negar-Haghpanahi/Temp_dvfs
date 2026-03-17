@@ -31,11 +31,11 @@ class LoadData:
             dataset_name = datasetName
             
         if dataset_name == 'wisdm':
-            data = np.load('data_loader\\Datasets\\wisdm.npz')
+            data = np.load('data_loader//Datasets//wisdm.npz')
             self.data, self.labels_array = data["X"], data["y"]
             
         elif dataset_name == 'wharDataOriginal':
-            with open("data_loader\\Datasets\\wharDataOriginal.pkl", "rb") as f:
+            with open("data_loader//Datasets//wharDataOriginal.pkl", "rb") as f:
                 x_raw, self.labels_array = pickle.load(f)
                 
             self.data = np.squeeze(x_raw, axis=1)
@@ -148,7 +148,7 @@ class LoadData:
             print("Final y shape:", self.labels_array.shape)
             
         elif dataset_name == 'ACCGyro':   
-            CSV_PATH = r"data_loader\\Datasets\\accelerometer_gyro_mobile_phone_dataset.csv"   # <-- change this
+            CSV_PATH = r"data_loader//Datasets//accelerometer_gyro_mobile_phone_dataset.csv"   # <-- change this
             WINDOW_SIZE = 128
             STRIDE = 64   # overlap allowed
 
@@ -208,7 +208,7 @@ class LoadData:
             
         else:    
             model_type = args.model_type
-            file_path =f'data_loader\\Datasets\\{dataset_name}_dataLabels.pkl'
+            file_path =f'data_loader//Datasets//{dataset_name}_dataLabels.pkl'
             with open(file_path, 'rb') as file:
                 data_dict = pickle.load(file)
             self.data = data_dict['data']

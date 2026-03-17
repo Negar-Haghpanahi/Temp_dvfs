@@ -12,7 +12,7 @@ def Test(X_test, y_test, model, args):
     window_time = float(window_len) / float(args.fs_base)
     
     fe = FeatureEngineer()
-    for w in range(len(X_test)):
+    for w in range(min(100 ,len(X_test))):
         print(f"w is --> {w}")
         sensor_on(verbose=True)
         
@@ -20,7 +20,7 @@ def Test(X_test, y_test, model, args):
         time.sleep(window_time)
         
         X_test_feat = fe.extract_features(X_test[w:w+1])
-        pred = model.predict(X_test_feat[0])
+        pred = int( model.predict(X_test_feat)[0])
         
      
         t_end = time.time()
