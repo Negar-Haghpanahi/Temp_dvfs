@@ -5,12 +5,12 @@ from sensor_control import initialize_bmi160, sensor_on, sensor_sleep
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--dataset_name", type=str, default="ACCGyro")
-    p.add_argument("--n_est", type=int, default=150)
-    p.add_argument("--max_depth", type=int, default=4)
+    p.add_argument("--dataset_name", type=str, default="wisdm")
+    p.add_argument("--n_est", type=int, default=120)
+    p.add_argument("--max_depth", type=int, default=5)
     
     
-    p.add_argument("--fs_base", type=float, default=10.0)
+    p.add_argument("--fs_base", type=float, default=20.0)
     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
     p.add_argument("--print_trace", action="store_true")
     
