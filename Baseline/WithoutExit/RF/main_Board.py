@@ -27,7 +27,9 @@ def add_header(file, header):
 
 if __name__ == "__main__":
     args = parse_args()
+    print("time s ", time.time())
     time.sleep(2)
+    print("time end_2" , time.time()) 
 
     classData = LoadData()
     classData.Read(args.dataset_name)
