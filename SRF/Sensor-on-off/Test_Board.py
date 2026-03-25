@@ -1,10 +1,10 @@
 from Inference_Board import RunInference
 import time
+from  sensor_control import initialize_bmi160 , sensor_on , sensor_sleep
 
 
 
-
-def Test(X_test , y_test , models ,args,  fs_base , window_len ,split_points ,sensor_on, sensor_sleep):
+def Test(X_test , y_test , models ,args,  fs_base , window_len ,split_points):
     
     all_per_sample_results = []
     
@@ -15,10 +15,10 @@ def Test(X_test , y_test , models ,args,  fs_base , window_len ,split_points ,se
     # Now, loop through each data type for inference and add type-specific metrics
     for w in range(len(X_test)):
         
-        
+        print("w is  --> ", w) 
         
         start_time_infernce = time.time()
-        inference_obj = RunInference( fs_base , window_len ,split_points ,sensor_on, sensor_sleep ,  X_test=X_test[w], y_test=y_test[w], models=models, stages=args.proportions , window_num= w )
+        inference_obj = RunInference( fs_base , window_len ,split_points ,  X_test=X_test[w], y_test=y_test[w], models=models, stages=args.proportions , window_num= w )
 
         sub_forest_entropy, prediction = inference_obj.predict_proba()
 

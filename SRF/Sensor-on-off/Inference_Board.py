@@ -5,7 +5,7 @@ from sklearn.utils.multiclass import unique_labels
 from sklearn.metrics import accuracy_score
 from ECE import ECE_computation , calculate_confidence_max_prob
 import concurrent.futures , time
-
+from sensor_control import sensor_on , sensor_sleep
 
 
 def _predict_for_tree(args):
@@ -45,7 +45,7 @@ def stage_acquisition_times(split_points, window_len, fs_base):
 
 class RunInference:
 
-    def __init__(self,  fs_base , window_len ,split_points ,sensor_on, sensor_sleep, X_test, y_test, models , stages, window_num):
+    def __init__(self,  fs_base , window_len ,split_points , X_test, y_test, models , stages, window_num):
         
         self.X_test = X_test 
         self.y_test = y_test 
@@ -62,8 +62,8 @@ class RunInference:
         self.indices_in = []
         self.indices_out = []
         self.absolute_time_per_stage = []
-        self.sensor_on = sensor_on
-        self.sensor_sleep = sensor_sleep    
+        self.sensor_on = None
+        self.sensor_sleep = None    
         self.fs_base = fs_base
         self.window_len = window_len
         self.split_points = split_points
@@ -97,7 +97,7 @@ class RunInference:
         self.T_window = full_window_time_sec(self.window_len, self.fs_base)
         acq_times = stage_acquisition_times(self.split_points, self.window_len, self.fs_base)
         
-        self.sensor_on()
+        sensor_on()
         
         for j in range(len(self.models)):
             
@@ -211,7 +211,7 @@ class RunInference:
             if sample_entropy_value < threshold_list_of_keys[stage_idx]:
                 
                 # Sample Exits
-                self.sensor_sleep()
+                sensor_sleep()
                 remaining_off_time = max(0.0, self.T_window - time_spent_at_stage)
                 time.sleep(remaining_off_time)
 
