@@ -8,25 +8,16 @@ from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_
 
 
 def parse_args():
-   # parser = argparse.ArgumentParser(description = "RF-H Inference")
-   # parser.add_argument("--dataset_name", type=str, default= "Epilepsy", help = "The Dataset name")
-   # parser.add_argument("--n_est", type=int,default=87, help = "The number of estimators")
-   # parser.add_argument("--max_depth", type=int, default=22, help = "The max depth")
-   # parser.add_argument("--num_exits", type=int,  default=3,help = "The number of exits")
-   # parser.add_argument("--tree_splits", type=list, default=[0.37, 0.48, 1] ,help = "Tree splits")
-   # parser.add_argument("--proportions", type=list, default=[0.25, 0.37, 1],help = "Data proportions",  nargs="+")
-   # parser.add_argument("--th_combination", type=list, default=[1.38, 1.33], help = "Threshold combination", nargs="+")
+    parser = argparse.ArgumentParser(description = "RF-H Inference")
+    parser.add_argument("--dataset_name", type=str, default= "Epilepsy", help = "The Dataset name")
+    parser.add_argument("--n_est", type=int,default=87, help = "The number of estimators")
+    parser.add_argument("--max_depth", type=int, default=22, help = "The max depth")
+    parser.add_argument("--num_exits", type=int,  default=3,help = "The number of exits")
+    parser.add_argument("--tree_splits", type=list, default=[0.37, 0.48, 1] ,help = "Tree splits")
+    parser.add_argument("--proportions", type=list, default=[0.25, 0.37, 1],help = "Data proportions",  nargs="+")
+    parser.add_argument("--th_combination", type=list, default=[1.38, 1.33], help = "Threshold combination", nargs="+")
 
     
-
-    parser = argparse.ArgumentParser(description = "RF-H Inference")
-    parser.add_argument("--dataset_name", type=str, default= "PAMAP2", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int,default=26, help = "The number of estimators")
-    parser.add_argument("--max_depth", type=int, default=21, help = "The max depth")
-    parser.add_argument("--num_exits", type=int,  default=2 ,help = "The number of exits")
-    parser.add_argument("--tree_splits", type=list, default=[0.5, 1] ,help = "Tree splits")
-    parser.add_argument("--proportions", type=list, default=[0.25, 1] ,help = "Data proportions",  nargs="+")
-    parser.add_argument("--th_combination", type=list, default=[1.56], help = "Threshold combination", nargs="+")
       
     return parser.parse_args()
 
