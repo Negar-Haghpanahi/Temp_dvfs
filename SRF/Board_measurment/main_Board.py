@@ -6,26 +6,29 @@ from Test_Board import Test
 
 def parse_args():
    
-    parser = argparse.ArgumentParser(description = "RF-H Inference")
-    parser.add_argument("--dataset_name", type=str, default= "Epilepsy", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int,default=87, help = "The number of estimators")
-    parser.add_argument("--max_depth", type=int, default=22, help = "The max depth")
-    parser.add_argument("--num_exits", type=int,  default=3,help = "The number of exits")
-    parser.add_argument("--tree_splits", type=list, default=[0.37, 0.48, 1] ,help = "Tree splits")
-    parser.add_argument("--proportions", type=list, default=[0.25, 0.37, 1],help = "Data proportions",  nargs="+")
-    parser.add_argument("--th_combination", type=list, default=[1.38, 1.33], help = "Threshold combination", nargs="+")
-
-
-    # parser = argparse.ArgumentParser(description = "RF-H Inference")
-    # parser.add_argument("--dataset_name", type=str, default= "PAMAP2", help = "The Dataset name")
-    # parser.add_argument("--n_est", type=int,default=26, help = "The number of estimators")
-    # parser.add_argument("--max_depth", type=int, default=21, help = "The max depth")
-    # parser.add_argument("--num_exits", type=int,  default=2 ,help = "The number of exits")
-    # parser.add_argument("--tree_splits", type=list, default=[0.5, 1] ,help = "Tree splits")
-    # parser.add_argument("--proportions", type=list, default=[0.25, 1] ,help = "Data proportions",  nargs="+")
-    # parser.add_argument("--th_combination", type=list, default=[1.56], help = "Threshold combination", nargs="+")
+     parser = argparse.ArgumentParser(description = "RF-H Inference")
+     parser.add_argument("--dataset_name", type=str, default= "EMGPhysical", help = "The Dataset name")
+     parser.add_argument("--n_est", type=int,default=37, help = "The number of estimators")
+     parser.add_argument("--max_depth", type=int, default=28, help = "The max depth")
+     parser.add_argument("--num_exits", type=int,  default=2,help = "The number of exits")
+     parser.add_argument("--tree_splits", type=list, default=[0.5, 1] ,help = "Tree splits")
+     parser.add_argument("--proportions", type=list, default=[0.33, 1],help = "Data proportions",  nargs="+")
+     parser.add_argument("--th_combination", type=list, default=[1.31], help = "Threshold combination", nargs="+")
     
-    return parser.parse_args()
+
+     #parser = argparse.ArgumentParser(description = "RF-H Inference")
+     #parser.add_argument("--dataset_name", type=str, default= "PAMAP2", help = "The Dataset name")
+     #parser.add_argument("--n_est", type=int,default=26, help = "The number of estimators")
+     #parser.add_argument("--max_depth", type=int, default=21, help = "The max depth")
+     #parser.add_argument("--num_exits", type=int,  default=2 ,help = "The number of exits")
+     #parser.add_argument("--tree_splits", type=list, default=[0.5, 1] ,help = "Tree splits")
+     #parser.add_argument("--proportions", type=list, default=[0.25, 1] ,help = "Data proportions",  nargs="+")
+     #parser.add_argument("--th_combination", type=list, default=[1.56], help = "Threshold combination", nargs="+")
+    
+
+    
+
+     return parser.parse_args()
 
 def write_content_to_file(file, content, header): # the content is a list of dictionaries
     writer = csv.writer(file)
@@ -40,8 +43,9 @@ def add_header(file, header):
     
     
 if __name__ =="__main__":
-    
-    time.sleep(2)
+    print("t1 is -->",time.time())
+    time.sleep(5)
+    print("t2  is -->",time.time())
     args = parse_args()
     classData = LoadData()
     classData.Read(args.dataset_name)
