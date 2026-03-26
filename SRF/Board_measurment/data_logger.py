@@ -7,7 +7,7 @@ ina = INA219(SHUNT_OHMS, busnum=1)
 ina.configure()
  
 header = ["time s", "power mW"]
-filename = "PKL_Saved_Files_inference/EMG_Power.csv"
+filename = "PKL_Saved_Files_inference/wesad_Power.csv"
 data_all = []
  
  
