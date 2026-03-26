@@ -97,12 +97,12 @@ def run_staged_srf(X_train, y_train, X_VAL, y_VAL, config_index,
 def parse_args():
     parser = argparse.ArgumentParser(description = "RF-H Inference")
     parser.add_argument("--dataset_name", type=str, default= "Epilepsy", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int,default=18, help = "The number of estimators")
-    parser.add_argument("--max_depth", type=int, default=16, help = "The max depth")
+    parser.add_argument("--n_est", type=int,default=87, help = "The number of estimators")
+    parser.add_argument("--max_depth", type=int, default=22, help = "The max depth")
     parser.add_argument("--num_exits", type=int,  default=3,help = "The number of exits")
-    parser.add_argument("--tree_splits", type=list, default=[0.36, 0.54, 1],help = "Tree splits")
-    parser.add_argument("--proportions", type=list, default=[0.3, 0.44, 1],help = "Data proportions",  nargs="+")
-    parser.add_argument("--th_combination", type=list, default=[0.46, 0.66], help = "Threshold combination", nargs="+")
+    parser.add_argument("--tree_splits", type=list, default=[0.37, 0.48, 1] ,help = "Tree splits")
+    parser.add_argument("--proportions", type=list, default=[0.25, 0.37, 1],help = "Data proportions",  nargs="+")
+    parser.add_argument("--th_combination", type=list, default=[1.38, 1.33], help = "Threshold combination", nargs="+")
 
     return parser.parse_args()
 
