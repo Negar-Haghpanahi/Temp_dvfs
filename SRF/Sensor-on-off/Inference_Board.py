@@ -30,7 +30,7 @@ def full_window_time_sec(window_len, fs_base):
 
 def stage_acquisition_times(split_points, window_len, fs_base):
   
-    T_window =4  #full_window_time_sec(window_len, fs_base)
+    T_window =5.12  #full_window_time_sec(window_len, fs_base)
     prev = 0.0
     out = []
     for p in split_points:
