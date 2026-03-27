@@ -46,7 +46,7 @@ def read_configuration_return_results(window_len, fs_base, dataset_name, sensor_
     y_test = np.load(y_test_file)
     nb_clss = int(np.load(num_classes_file)[0])
 
-    T_window =4 #full_window_time_sec(window_len, fs_base) # **********************************************
+    T_window =full_window_time_sec(window_len, fs_base) # **********************************************
 
     list_of_inference_results = []
     
