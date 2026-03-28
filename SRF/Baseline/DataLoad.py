@@ -29,7 +29,7 @@ class LoadData:
             dataset_name = datasetName
            
         model_type = args.model_type
-        file_path = f'Datasets/{dataset_name}_dataLabels.pkl'
+        file_path = f'C:\\Users\\negar.haghpanahi\\OneDrive - Washington State University (email.wsu.edu)\\WSU\\Fall2025-Semster2\\Research\\DVFS\\Dynamic_Early_Exit\\CLONE-RSP0\\Temp_dvfs\\SRF\\Baseline\\Datasets\\{dataset_name}_dataLabels.pkl'
         with open(file_path, 'rb') as file:
             data_dict = pickle.load(file)
         self.data = data_dict['data']

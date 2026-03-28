@@ -7,7 +7,7 @@ from DataLoad import LoadData
 
 
 def Train_and_Save(dataset_name, n_estimators, tree_depth):
-    file_path = f'Datasets/{dataset_name}_dataLabels.pkl'
+    file_path = f'C:\\Users\\negar.haghpanahi\\OneDrive - Washington State University (email.wsu.edu)\\WSU\\Fall2025-Semster2\\Research\\DVFS\\Dynamic_Early_Exit\\CLONE-RSP0\\Temp_dvfs\\SRF\\Baseline\\Datasets\\{dataset_name}_dataLabels.pkl'
     with open(file_path, 'rb') as f:
         data_dict = pickle.load(f)
 
@@ -69,8 +69,8 @@ def Train_and_Save(dataset_name, n_estimators, tree_depth):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "RF-V Training")
-    parser.add_argument("--dataset_name", type=str, default= "Epilepsy", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int, default=95, help = "The number of estimators")
+    parser.add_argument("--dataset_name", type=str, default= "EMGPhysical", help = "The Dataset name")
+    parser.add_argument("--n_est", type=int, default=150, help = "The number of estimators")
     parser.add_argument("--max_depth", type=int, default=100, help = "The max depth")
     args = parser.parse_args()
     Train_and_Save(args.dataset_name, args.n_est, args.max_depth)
