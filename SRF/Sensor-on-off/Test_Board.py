@@ -13,9 +13,9 @@ def Test(X_test , y_test , models ,args,  fs_base , window_len ,split_points):
     
     
     # Now, loop through each data type for inference and add type-specific metrics
-    for w in range(len(X_test)):
+    for w in range(min(200 ,len(X_test))):
         
-        print("w is  --> ", w) 
+        #print("w is  --> ", w) 
         
         start_time_infernce = time.time()
         inference_obj = RunInference( fs_base , window_len ,split_points ,  X_test=X_test[w], y_test=y_test[w], models=models, stages=args.proportions , window_num= w )

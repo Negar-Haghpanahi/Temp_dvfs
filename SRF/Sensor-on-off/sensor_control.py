@@ -37,7 +37,7 @@ def sensor_on(verbose=True):
 
     if verbose:
         status, acc_mode, gyro_mode = sensor_status()
-        print("Sensor ON | status:", status, "| ACC mode:", acc_mode, "| GYRO mode:", gyro_mode)
+        #print("Sensor ON | status:", status, "| ACC mode:", acc_mode, "| GYRO mode:", gyro_mode)
 
 
 def sensor_sleep(verbose=True):
@@ -48,7 +48,7 @@ def sensor_sleep(verbose=True):
 
     if verbose:
         status, acc_mode, gyro_mode = sensor_status()
-        print("Sensor SLEEP | status:", status, "| ACC mode:", acc_mode, "| GYRO mode:", gyro_mode)
+        #print("Sensor SLEEP | status:", status, "| ACC mode:", acc_mode, "| GYRO mode:", gyro_mode)
 
 
 def read_raw_acceleration():

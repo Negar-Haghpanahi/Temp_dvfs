@@ -30,7 +30,7 @@ def full_window_time_sec(window_len, fs_base):
 
 def stage_acquisition_times(split_points, window_len, fs_base):
   
-    T_window =full_window_time_sec(window_len, fs_base)
+    T_window = 5.12 #full_window_time_sec(window_len, fs_base)
     prev = 0.0
     out = []
     for p in split_points:
@@ -94,7 +94,7 @@ class RunInference:
         
         #*********************
         
-        self.T_window = full_window_time_sec(self.window_len, self.fs_base)
+        self.T_window = 5.12 # full_window_time_sec(self.window_len, self.fs_base)
         acq_times = stage_acquisition_times(self.split_points, self.window_len, self.fs_base)
         
         sensor_on()
