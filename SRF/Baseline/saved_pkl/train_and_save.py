@@ -69,9 +69,9 @@ def Train_and_Save(dataset_name, n_estimators, tree_depth):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "RF-V Training")
-    parser.add_argument("--dataset_name", type=str, default= "EMGPhysical", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int, default=40, help = "The number of estimators")
-    parser.add_argument("--max_depth", type=int, default=35, help = "The max depth")
+    parser.add_argument("--dataset_name", type=str, default= "PAMAP2", help = "The Dataset name")
+    parser.add_argument("--n_est", type=int, default=20, help = "The number of estimators")
+    parser.add_argument("--max_depth", type=int, default=15, help = "The max depth")
     args = parser.parse_args()
     Train_and_Save(args.dataset_name, args.n_est, args.max_depth)
   
