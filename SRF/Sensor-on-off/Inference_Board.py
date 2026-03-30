@@ -30,7 +30,7 @@ def full_window_time_sec(window_len, fs_base):
 
 def stage_acquisition_times(split_points, window_len, fs_base):
   
-    T_window = 5.12 #full_window_time_sec(window_len, fs_base)
+    T_window = 2  #full_window_time_sec(window_len, fs_base)
     prev = 0.0
     out = []
     for p in split_points:
@@ -94,7 +94,7 @@ class RunInference:
         
         #*********************
         
-        self.T_window = 5.12 # full_window_time_sec(self.window_len, self.fs_base)
+        self.T_window = 2 # full_window_time_sec(self.window_len, self.fs_base)
         acq_times = stage_acquisition_times(self.split_points, self.window_len, self.fs_base)
         
         sensor_on()
@@ -102,7 +102,7 @@ class RunInference:
         for j in range(len(self.models)):
             
             seg_wait = float(acq_times[j])
-            time.sleep(seg_wait)
+            #time.sleep(seg_wait)
             self.sensor_total_on_sec.append(seg_wait)
             
             t_stage_start = time.time()
@@ -211,6 +211,7 @@ class RunInference:
             if sample_entropy_value < threshold_list_of_keys[stage_idx]:
                 
                 # Sample Exits
+                time.sleep(time_spent_at_stage)
                 sensor_sleep()
                 remaining_off_time = max(0.0, self.T_window - time_spent_at_stage)
                 time.sleep(remaining_off_time)
@@ -231,7 +232,7 @@ class RunInference:
                 per_sample_result['data%'] = self.stages[stage_num - 1]
                 per_sample_result['sensor_total_on_sec'] = time_spent_at_stage
                 per_sample_result['sensor_total_off_sec'] = remaining_off_time
-                break 
+            break 
                 
         # --------------------------------------------------------------------------------
         # 2. FORCED EXIT AT THE FINAL RF STAGE (RF N)
