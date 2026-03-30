@@ -231,7 +231,7 @@ class RunInference:
                 per_sample_result['data%'] = self.stages[stage_num - 1]
                 per_sample_result['sensor_total_on_sec'] = time_spent_at_stage
                 per_sample_result['sensor_total_off_sec'] = remaining_off_time
-                break 
+            break 
                 
         # --------------------------------------------------------------------------------
         # 2. FORCED EXIT AT THE FINAL RF STAGE (RF N)
