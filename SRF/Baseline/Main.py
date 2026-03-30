@@ -11,7 +11,7 @@ from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_
 
 def parse_args():
     parser = argparse.ArgumentParser(description = "RF-V Inference")
-    parser.add_argument("--dataset_name", type=str, default= "EMGPhysical", help = "The Dataset name")
+    parser.add_argument("--dataset_name", type=str, default= "PAMAP2", help = "The Dataset name")
     # parser.add_argument("--num_exits", type=int, help = "The number of exits")
     # parser.add_argument("--proportions", type=float, help = "Data proportions", nargs="+")
     # parser.add_argument("--th_combination", type=float, help = "Threshold combination", nargs="+")
