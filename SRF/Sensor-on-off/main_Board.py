@@ -18,6 +18,7 @@ def parse_args():
      parser.add_argument("--proportions", type=list, default=[0.33, 1],help = "Data proportions",  nargs="+")
      parser.add_argument("--th_combination", type=list, default=[1.31], help = "Threshold combination", nargs="+")
     
+    
      return parser.parse_args()
 
 def write_content_to_file(file, content, header): # the content is a list of dictionaries

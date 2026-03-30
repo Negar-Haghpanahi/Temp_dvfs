@@ -211,7 +211,7 @@ class RunInference:
             if sample_entropy_value < threshold_list_of_keys[stage_idx]:
                 
                 # Sample Exits
-                time.sleep(time_spent_at_stage)
+                time.sleep(time_spent_at_stage-0.2)
                 sensor_sleep()
                 remaining_off_time = max(0.0, self.T_window - time_spent_at_stage)
                 time.sleep(remaining_off_time)
