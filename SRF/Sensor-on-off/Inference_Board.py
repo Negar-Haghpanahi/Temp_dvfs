@@ -188,8 +188,11 @@ class RunInference:
                     else:
                         t_after_sleep_command = t_before_sleep_command
 
-                    elapsed_so_far = t_after_sleep_command - t_start_absolute
-                    remaining_off_time = max(0.0, self.T_window - elapsed_so_far)
+                    
+                        
+                
+                    observed_fraction = float(self.stages[stage_idx])
+                    remaining_off_time = max(0.0, self.T_window * (1.0 - observed_fraction))
                     self.sensor_total_off_sec = remaining_off_time
 
                     if remaining_off_time > 0:
