@@ -67,6 +67,7 @@ if __name__ == "__main__":
     initialize_bmi160()
     print("BMI160 Initialized")
     auto_calibrate()
+    sensor_on()
 
 
     results = read_configuration_return_results(window_len, fs_base, args.dataset_name,sensor_on)
