@@ -26,7 +26,7 @@ def full_window_time_sec(window_len, fs_base):
 
 def stage_acquisition_times(split_points, window_len, fs_base):
     """Return incremental acquisition time for each stage."""
-    total_window_sec = full_window_time_sec(window_len, fs_base)
+    total_window_sec =  5.12 #full_window_time_sec(window_len, fs_base)
     prev = 0.0
     out = []
     for p in split_points:
