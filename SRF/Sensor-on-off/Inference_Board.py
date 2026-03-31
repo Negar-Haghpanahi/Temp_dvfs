@@ -140,7 +140,7 @@ class RunInference:
 
                 # Simulate incremental sensing for this stage while the sensor is ON.
                 if seg_wait > 0:
-                    time.sleep(seg_wait)
+                    time.sleep(seg_wait-0.2)
 
                 t_compute_start = time.time()
 
