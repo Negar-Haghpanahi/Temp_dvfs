@@ -140,7 +140,7 @@ class RunInference:
 
                 # Simulate incremental sensing for this stage while the sensor is ON.
                 if seg_wait > 0:
-                    time.sleep(seg_wait-0.2)
+                    time.sleep(seg_wait)
 
                 t_compute_start = time.time()
 
@@ -194,9 +194,13 @@ class RunInference:
                     observed_fraction = float(self.stages[stage_idx])
                     remaining_off_time = max(0.0, self.T_window * (1.0 - observed_fraction))
                     self.sensor_total_off_sec = remaining_off_time
+                    
+                    remaining_off_time_temp =  remaining_off_time - 0.2                     
 
-                    if remaining_off_time > 0:
-                        time.sleep(remaining_off_time)
+                    if remaining_off_time_temp > 0:
+                         time.sleep(remaining_off_time_temp)
+                    else:
+                          time.sleep(remaining_off_time)
 
                     t_end_absolute = time.time()
 

@@ -8,7 +8,6 @@ from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_
 
 
 def parse_args():
-
      parser = argparse.ArgumentParser(description = "RF-H Inference")
      parser.add_argument("--dataset_name", type=str, default= "EMGPhysical", help = "The Dataset name")
      parser.add_argument("--n_est", type=int,default=37, help = "The number of estimators")
@@ -19,6 +18,9 @@ def parse_args():
      parser.add_argument("--th_combination", type=list, default=[1.31], help = "Threshold combination", nargs="+")
     
     
+
+
+
      return parser.parse_args()
 
 def write_content_to_file(file, content, header): # the content is a list of dictionaries
