@@ -22,8 +22,10 @@ def Test(X_test, y_test, model, args):
         
         
         X_test_feat = fe.extract_features(X_test[w:w+1])
+        t_before = time.time()
         pred = int(model.predict(X_test_feat)[0])
-        
+        t_after = time.time()
+        print("total time infernce is --> ", t_after-t_before)
      
         t_end = time.time()
         
