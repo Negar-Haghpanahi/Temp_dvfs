@@ -87,7 +87,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             if exit_now:
                 exit_level = int(k + 1)
                 
-                remaining_off_time = max(0.0, T_window - sensor_total_on_sec-0.2)
+                remaining_off_time = max(0.0, T_window - sensor_total_on_sec)  # ****** add 0.2
                 #if remaining_off_time > 0 :
                  #  sensor_sleep()
                 print("sensor off  seg -- > " , remaining_off_time ," exit num is --> " ,k)
