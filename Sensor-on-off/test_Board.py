@@ -2,7 +2,7 @@ import time
 
 
 def full_window_time_sec(window_len, fs_base):
-    return float(window_len) / float(fs_base)
+    return 4    #float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
@@ -51,9 +51,9 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
         # -------- START OF WINDOW: SENSOR ON --------
         sensor_on()
-        if sensor_wakeup_sec > 0:
-            time.sleep(sensor_wakeup_sec)
-            sensor_total_on_sec += sensor_wakeup_sec
+       # if sensor_wakeup_sec > 0:
+        ##    time.sleep(sensor_wakeup_sec)
+         #   sensor_total_on_sec += sensor_wakeup_sec
 
         for k in range(num_exits):
             # keep sensor ON only for the NEW required segment time
@@ -61,10 +61,10 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
             if print_trace:
                 print(f"  Stage {k+1}: sensor ON for new segment = {seg_wait:.6f} sec")
-
-            time.sleep(seg_wait)
+            print("sensor on seg -- > " , seg_wait," exit num is --> " ,k)
+            time.sleep(seg_wait- 0.2)
             sensor_total_on_sec += seg_wait
-
+            t_before = time.time()
             pred, stage_info, x_acc, factor_next, H_prev, exit_now = model.predict_one_stage(
                 x_full_one=x_one,
                 stage_idx=k,
@@ -75,6 +75,9 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
                 sample_id=w,
                 print_trace=print_trace,
             )
+           
+            t_after = time.time()
+            print("total time inferenec is --> ", t_after - t_before)
 
             compute_sec = float(stage_info.get("stage_time_sec", 0.0))
             compute_total_sec += compute_sec
@@ -82,8 +85,11 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
             if exit_now:
                 exit_level = int(k + 1)
-                sensor_sleep()
-                remaining_off_time = max(0.0, T_window - sensor_total_on_sec)
+                
+                remaining_off_time = max(0.0, T_window - sensor_total_on_sec-0.2)
+                if remaining_off_time > 0 :
+                   sensor_sleep()
+                print("sensor off  seg -- > " , seg_wait," exit num is --> " ,k)
                 time.sleep(remaining_off_time)
                 if print_trace:
                     print(f"  -> EXIT at stage {exit_level}")
