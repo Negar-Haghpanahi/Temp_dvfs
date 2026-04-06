@@ -36,8 +36,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             print("\n" + "=" * 60)
             print(f"Window {w}")
 
-        t_start = time.time()
-
+        
         x_one = X_test[w:w + 1]
         x_acc = None
         factor_next = None
@@ -50,6 +49,8 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
         compute_total_sec = 0.0
 
         # -------- START OF WINDOW: SENSOR ON --------
+        t_start = time.time()
+
         sensor_on()
        # if sensor_wakeup_sec > 0:
         ##    time.sleep(sensor_wakeup_sec)

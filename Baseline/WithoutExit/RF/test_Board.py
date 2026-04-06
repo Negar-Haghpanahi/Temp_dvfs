@@ -14,10 +14,12 @@ def Test(X_test, y_test, model, args):
     fe = FeatureEngineer()
     for w in range(min(100 ,len(X_test))):
         print(f"w is --> {w}")
-        sensor_on(verbose=True)
+        
         
         t_start = time.time()
+        sensor_on(verbose=True)
         time.sleep(window_time- 0.2 )
+        
         
         X_test_feat = fe.extract_features(X_test[w:w+1])
         pred = int(model.predict(X_test_feat)[0])
