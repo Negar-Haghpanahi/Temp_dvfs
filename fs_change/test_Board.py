@@ -18,6 +18,57 @@ def stage_acquisition_times(split_points, window_len, fs_base):
     return out
 
 
+
+def next_start_factor_policy(debug,weak_ratio=0.02, strong_ratio=0.10):
+        
+        stages = debug["stages"]
+        last = stages[-1]
+        exit_stage = int(last["stage"])
+
+        H_exit = last.get("entropy", None)
+        tau_exit = last.get("tau", None)
+
+        # if forced last stage or missing tau => treat hard
+        if H_exit is None or tau_exit is None:
+            return 1
+
+        H_exit = float(H_exit)
+        tau_exit = float(tau_exit)
+        delta = max(0.0, tau_exit - H_exit)
+
+        weak = weak_ratio * tau_exit
+        strong = strong_ratio * tau_exit
+
+        # used_full = any(int(st.get("factor_used", -1)) == 1 for st in stages) #If a sample ever required factor 1 (full rate) inside its path, it’s a “hard sample”.
+
+        if exit_stage == 1:
+            if delta >= strong:
+                f = 64
+            elif delta >= weak:
+                f = 8
+            else:
+                f = 1
+                
+        elif exit_stage == 2:
+            if delta >= strong:
+                f = 8
+            elif delta >= weak:
+                f = 4                       
+            else:
+                f = 1
+        
+        elif exit_stage == 3:
+            if delta >= strong:
+                f = 4
+            else:
+                f = 1
+                
+        else:
+            f = 1
+
+        return f
+        
+
 def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base,window_len,sensor_wakeup_sec=0.0,print_trace=True,):
     all_results = []
 
@@ -98,6 +149,20 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
                 time.sleep(remaining_off_time)
                 if print_trace:
                     print(f"  -> EXIT at stage {exit_level}")
+                    
+                factor_next = next_start_factor_policy(stage_info)
+                
+                if factor_next == 64:
+                    factor_next = 10
+                
+                elif factor_next == 8:
+                    factor_next = 100
+                    
+                elif factor_next == 4:
+                    factor_next = 400
+                    
+                else:
+                    factor_next = 1344
                 break
 
         # -------- EXIT HAPPENED: SENSOR OFF FOR REMAINING WINDOW TIME --------
