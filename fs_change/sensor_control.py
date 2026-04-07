@@ -10,7 +10,7 @@ print(time.time(), "start")
 # --- Configuration ---
 I2C_ADDR = 0x19          # LSM303DLHC accel
 MAG_ADDR = 0x1E          # LSM303DLHC mag
-INT1_GPIO = 24
+INT1_GPIO = 23
 CSV_FILE = "lsm303_data.csv"
 
 bus = smbus2.SMBus(1)

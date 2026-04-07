@@ -69,7 +69,8 @@ if __name__ =="__main__":
         classData.SplitData()
         X_test = classData.GetXtest()
         y_test = classData.GetYtest()
-        
+    
+    print("get model")    
     model = all_models[0]['models']  
     init_sensor()
     # initialize_bmi160()
@@ -77,7 +78,7 @@ if __name__ =="__main__":
     # print("BMI160 Initialized")
     # auto_calibrate()
 
-    
+    print("after sensor on")
     window_len = int(X_test.shape[2])
 
     # ------------------------------

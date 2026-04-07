@@ -81,11 +81,12 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
     start_factor_state = model.default_start_factor
     
     factor_next = 1344
-    
+    print("befor loop window")
+
     for w in range(min(100 , len(X_test))):
-        if print_trace:
-            print("\n" + "=" * 60)
-            print(f"Window {w}")
+        #if print_trace:
+        #print("\n" + "=" * 60)
+        print(f"Window {w}")
 
         t_start = time.time()
 
