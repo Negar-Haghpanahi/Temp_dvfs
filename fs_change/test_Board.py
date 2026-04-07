@@ -21,8 +21,8 @@ def stage_acquisition_times(split_points, window_len, fs_base):
 
 def next_start_factor_policy(debug,weak_ratio=0.02, strong_ratio=0.10):
         
-        stages = debug["stages"]
-        last = stages[-1]
+        #stages = debug["stages"]
+        last = debug[-1]
         exit_stage = int(last["stage"])
 
         H_exit = last.get("entropy", None)
@@ -82,7 +82,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
     
     factor_next = 1344
     
-    for w in range(len(X_test)):
+    for w in range(min(100 , len(X_test))):
         if print_trace:
             print("\n" + "=" * 60)
             print(f"Window {w}")
@@ -150,7 +150,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
                 if print_trace:
                     print(f"  -> EXIT at stage {exit_level}")
                     
-                factor_next = next_start_factor_policy(stage_info)
+                factor_next = next_start_factor_policy(executed_stages)
                 
                 if factor_next == 64:
                     factor_next = 10
