@@ -3,7 +3,8 @@ import pickle ,os , time
 from ReadFile import LoadData
 import argparse , csv , numpy as np
 from test_Board import TestBoardControlled
-from sensor_control import   set_odr_Acc, set_sensor_off,init_sensor  #initialize_bmi160, auto_calibrate, sensor_on, sensor_sleep
+from sensor_control import   set_odr_Acc, set_sensor_off  , init_sensor #initialize_bmi160, auto_calibrate, sensor_on, sensor_sleep
+
 
 def parse_args():
         p = argparse.ArgumentParser()
@@ -68,6 +69,7 @@ if __name__ =="__main__":
     model = all_models[0]['models']  
     init_sensor()
     # initialize_bmi160()
+    init_sensor()
     # print("BMI160 Initialized")
     # auto_calibrate()
 
