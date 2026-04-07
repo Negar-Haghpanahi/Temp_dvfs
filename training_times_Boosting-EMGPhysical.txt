@@ -1,8 +1,0 @@
-Config 1, Stage Random forest 1, Duration: 1.72 seconds
-Config 1, Stage Random forest 2, Duration: 5.05 seconds
-Config 1, Total Duration for all the forests : 6.77 seconds
-
-Config 1, Stage Random forest 1, Duration: 1.71 seconds
-Config 1, Stage Random forest 2, Duration: 5.02 seconds
-Config 1, Total Duration for all the forests : 6.74 seconds
-
