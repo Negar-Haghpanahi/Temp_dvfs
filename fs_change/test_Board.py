@@ -2,7 +2,7 @@ import time
 
 
 def full_window_time_sec(window_len, fs_base):
-    return 3  #float(window_len) / float(fs_base)
+    return float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
@@ -102,13 +102,15 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
         compute_total_sec = 0.0
 
         # -------- START OF WINDOW: SENSOR ON --------
-     
+        lst_fs =[]     
+        factor_next = None
        
         for k in range(num_exits):
             # keep sensor ON only for the NEW required segment time
             sensor_on(factor_next_sensor)
             seg_wait = float(acq_times[k])
-
+            print("fs is " , factor_next_sensor)
+            lst_fs.append(factor_next_sensor)
             if print_trace:
                 print(f"  Stage {k+1}: sensor ON for new segment = {seg_wait:.6f} sec")
 
@@ -200,7 +202,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             "exit_level": int(exit_level),
             "window_num": int(w),
             "data%": float(executed_stages[-1]["split_point"] * 100.0) if executed_stages else -1.0,
-        
+            "all_fs" : lst_fs ,
             "window_start_fs": start_factor_state,
             "window_continue_fs": factor_next,
         }
