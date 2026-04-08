@@ -80,7 +80,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
     start_factor_state = model.default_start_factor
     
-    factor_next = 1344
+    factor_next_sensor = 1344
     print("befor loop window")
 
     for w in range(min(100 , len(X_test))):
@@ -106,7 +106,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
        
         for k in range(num_exits):
             # keep sensor ON only for the NEW required segment time
-            sensor_on(factor_next)
+            sensor_on(factor_next_sensor)
             seg_wait = float(acq_times[k])
 
             if print_trace:
@@ -131,16 +131,16 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             executed_stages.append(stage_info)
 
             if factor_next == 64:
-                factor_next = 10
+                factor_next_sensor = 10
                 
             elif factor_next == 8:
-                factor_next = 100
+                factor_next_sensor = 100
                 
             elif factor_next == 4:
-                factor_next = 400
+                factor_next_sensor = 400
                 
             else:
-                factor_next = 1344
+                factor_next_sensor = 1344
             
             
             if exit_now:
@@ -151,19 +151,19 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
                 if print_trace:
                     print(f"  -> EXIT at stage {exit_level}")
                     
-                factor_next = next_start_factor_policy(executed_stages)
+                start_factor_state = next_start_factor_policy(executed_stages)
                 
                 if factor_next == 64:
-                    factor_next = 10
+                    factor_next_sensor = 10
                 
                 elif factor_next == 8:
-                    factor_next = 100
+                    factor_next_sensor = 100
                     
                 elif factor_next == 4:
-                    factor_next = 400
+                    factor_next_sensor = 400
                     
                 else:
-                    factor_next = 1344
+                    factor_next_sensor = 1344
                 break
 
         # -------- EXIT HAPPENED: SENSOR OFF FOR REMAINING WINDOW TIME --------
@@ -200,6 +200,9 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             "exit_level": int(exit_level),
             "window_num": int(w),
             "data%": float(executed_stages[-1]["split_point"] * 100.0) if executed_stages else -1.0,
+        
+            "window_start_fs": start_factor_state,
+            "window_continue_fs": factor_next,
         }
 
         for i in range(1, num_exits + 1):
