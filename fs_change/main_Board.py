@@ -109,6 +109,9 @@ if __name__ =="__main__":
         "exit_level",
         "window_num",
         "data%",
+         
+        "window_start_fs",
+        "window_continue_fs",
     ])
 
     with open(output_file, "w", newline="") as f:
