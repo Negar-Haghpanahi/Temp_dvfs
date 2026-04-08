@@ -9,7 +9,7 @@ def Test(X_test, y_test, model, args):
     all_results = []
 
     window_len = X_test.shape[2]
-    window_time = float(window_len) / float(args.fs_base)
+    window_time = 4  #float(window_len) / float(args.fs_base)
     
     fe = FeatureEngineer()
     for w in range(min(100 ,len(X_test))):

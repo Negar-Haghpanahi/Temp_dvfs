@@ -5,7 +5,7 @@ from sensor_control import init_sensor , set_sensor_off , set_odr_Acc, read_fifo
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--dataset_name", type=str, default="wisdm")
+    p.add_argument("--dataset_name", type=str, default="Shoaib")
     # p.add_argument("--n_est", type=int, default=120)
     # p.add_argument("--max_depth", type=int, default=5)
     
