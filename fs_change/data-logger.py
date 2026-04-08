@@ -14,7 +14,7 @@ ina.configure()
  
 header = ["time s", "power mW"]
 
-filename = "PKL_Saved_Files/margin1.5/GB/whar_Power.csv"
+filename = "PKL_Saved_Files/margin1.5/GB/Epilepsy_Power.csv"
 
 data_all = []
  

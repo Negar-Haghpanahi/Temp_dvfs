@@ -2,7 +2,7 @@ import time
 
 
 def full_window_time_sec(window_len, fs_base):
-    return 3  #float(window_len) / float(fs_base)
+    return float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
@@ -80,7 +80,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
     start_factor_state = model.default_start_factor
     
-    factor_next_sensor = 1344
+    factor_next_sensor = 100
     print("befor loop window")
 
     for w in range(min(100 , len(X_test))):
