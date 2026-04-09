@@ -9,17 +9,17 @@ from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_
 def parse_args():
      
      p = argparse.ArgumentParser()
-     p.add_argument("--dataset_name", type=str, default="wisdm")
-     p.add_argument("--n_est", type=int, default=60)
-     p.add_argument("--max_depth", type=int, default=15)
+     p.add_argument("--dataset_name", type=str, default="Epilepsy")
+     p.add_argument("--n_est", type=int, default=250)
+     p.add_argument("--max_depth", type=int, default=4)
      p.add_argument("--num_exits", type=int, default=2)
 
-     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33 , 1.0])
-     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
-     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
-     
+     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.47, 1])
+     p.add_argument("--proportions", type=float, nargs="+", default=[0.36, 1])   # split_points
+     p.add_argument("--th_combination", type=float, nargs="+", default=[0.693147])    # th_list
+         
        
-     p.add_argument("--fs_base", type=float, default=20.0)
+     p.add_argument("--fs_base", type=float, default=250.0)
      p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
      p.add_argument("--print_trace", action="store_true")
      return p.parse_args()
@@ -48,12 +48,12 @@ if __name__ =="__main__":
     classData.SplitData()
 
     
-    with open(f"PKL_Saved_Files/margin1.5/RF/{args.dataset_name}_trained_model.pkl", "rb") as f:
+    with open(f"PKL_Saved_Files/margin1.5/GB/{args.dataset_name}_trained_model.pkl", "rb") as f:
         all_models = pickle.load(f,encoding='latin1')
         
    
-    x_path = f"PKL_Saved_Files/margin1.5/RF/{args.dataset_name}_X_test.npy"
-    y_path = f"PKL_Saved_Files/margin1.5/RF/{args.dataset_name}_y_test.npy"
+    x_path = f"PKL_Saved_Files/margin1.5/GB/{args.dataset_name}_X_test.npy"
+    y_path = f"PKL_Saved_Files/margin1.5/GB/{args.dataset_name}_y_test.npy"
 
     if os.path.exists(x_path) and os.path.exists(y_path):
         X_test = np.load(x_path, allow_pickle=True)
@@ -81,7 +81,7 @@ if __name__ =="__main__":
     all_result = TestBoardControlled(X_test=X_test,y_test=y_test,model=model,args=args,sensor_on=sensor_on,sensor_sleep=sensor_sleep,fs_base=args.fs_base,window_len=window_len,sensor_wakeup_sec=0.0,print_trace=args.print_trace,)
 
     output_file = (
-        f"PKL_Saved_Files/margin1.5/RF/"
+        f"PKL_Saved_Files/margin1.5/GB/"
         f"{args.dataset_name}_accuracy_results.csv"
     )
 
