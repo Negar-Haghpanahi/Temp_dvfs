@@ -9,17 +9,18 @@ from sensor_control import initialize_bmi160, auto_calibrate, sensor_on, sensor_
 def parse_args():
      
      p = argparse.ArgumentParser()
-     p.add_argument("--dataset_name", type=str, default="Epilepsy")
-     p.add_argument("--n_est", type=int, default=250)
-     p.add_argument("--max_depth", type=int, default=4)
-     p.add_argument("--num_exits", type=int, default=2)
 
-     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.47, 1])
-     p.add_argument("--proportions", type=float, nargs="+", default=[0.36, 1])   # split_points
-     p.add_argument("--th_combination", type=float, nargs="+", default=[0.693147])    # th_list
+     p.add_argument("--dataset_name", type=str, default="ACCGyro")
+     p.add_argument("--n_est", type=int, default=150)
+     p.add_argument("--max_depth", type=int, default=4)
+     p.add_argument("--num_exits", type=int, default=4)
+     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.47 ,0.59, 1])
+     p.add_argument("--proportions", type=float, nargs="+", default=[0.3, 0.41 ,0.56, 1])   # split_points
+     p.add_argument("--th_combination", type=float, nargs="+", default=[0.6931, 0.1732, 0.34657])    # th_list    
+
          
        
-     p.add_argument("--fs_base", type=float, default=250.0)
+     p.add_argument("--fs_base", type=float, default=10.0)
      p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
      p.add_argument("--print_trace", action="store_true")
      return p.parse_args()
