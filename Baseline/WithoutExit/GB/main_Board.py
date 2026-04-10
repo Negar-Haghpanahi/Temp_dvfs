@@ -5,9 +5,9 @@ from sensor_control import initialize_bmi160, sensor_on, sensor_sleep
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--dataset_name", type=str, default="wisdm")
-    p.add_argument("--n_est", type=int, default=120)
-    p.add_argument("--max_depth", type=int, default=5)
+    p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
+   # p.add_argument("--n_est", type=int, default=120)
+   # p.add_argument("--max_depth", type=int, default=5)
     
     
     p.add_argument("--fs_base", type=float, default=20.0)
