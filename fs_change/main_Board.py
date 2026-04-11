@@ -7,19 +7,21 @@ from sensor_control import   set_odr_Acc, set_sensor_off  , init_sensor #initial
 
 
 def parse_args():
-    p = argparse.ArgumentParser()    
-    p.add_argument("--dataset_name", type=str, default="ACCGyro")
-    p.add_argument("--n_est", type=int, default=60)
-    p.add_argument("--max_depth", type=int, default=60)
-    p.add_argument("--num_exits", type=int, default=4)
-    p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.47 ,0.59, 1])
-    p.add_argument("--proportions", type=float, nargs="+", default=[0.3, 0.41 ,0.57, 1])   # split_points
-    p.add_argument("--th_combination", type=float, nargs="+", default=[0.6931471805599453, 0.17328679513998632, 0.34657359027997264])    # th_list
-     
-    p.add_argument("--fs_base", type=float, default=10.0)
-    p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
-    p.add_argument("--print_trace", action="store_true")
-    return p.parse_args()
+     p = argparse.ArgumentParser()    
+       
+     p.add_argument("--dataset_name", type=str, default="Shoaib")
+     p.add_argument("--n_est", type=int, default=75)
+     p.add_argument("--max_depth", type=int, default=70)
+     p.add_argument("--num_exits", type=int, default=3)
+
+     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.31, 0.54, 1])
+     p.add_argument("--proportions", type=float, nargs="+", default=[0.39, 0.57, 1])   # split_points
+     p.add_argument("--th_combination", type=float, nargs="+", default=[0.48647753726382825, 1.945910149055313])    # th_list
+   
+     p.add_argument("--fs_base", type=float, default=10.0)
+     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
+     p.add_argument("--print_trace", action="store_true")
+     return p.parse_args()
      
     
 
