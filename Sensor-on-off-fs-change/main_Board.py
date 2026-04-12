@@ -7,22 +7,23 @@ from sensor_control import init_sensor , set_odr_Acc ,set_sensor_off
 
  
 def parse_args():
-     
-     p = argparse.ArgumentParser()
-     p.add_argument("--dataset_name", type=str, default="Shoaib")
-     p.add_argument("--n_est", type=int, default=200)
-     p.add_argument("--max_depth", type=int, default=5)
-     p.add_argument("--num_exits", type=int, default=4)
+    p = argparse.ArgumentParser()
+    p.add_argument("--dataset_name", type=str, default="wisdm")
+    p.add_argument("--n_est", type=int, default=60)
+    p.add_argument("--max_depth", type=int, default=15)
+    p.add_argument("--num_exits", type=int, default=2)
 
-     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
-     p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
-     p.add_argument("--th_combination", type=float, nargs="+", default=[0.4864, 1.45943, 0.9729550])    # th_list
-           
+    p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33 , 1.0])
+    p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
+    p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
+
+
+    
        
-     p.add_argument("--fs_base", type=float, default=250.0)
-     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
-     p.add_argument("--print_trace", action="store_true")
-     return p.parse_args()
+    p.add_argument("--fs_base", type=float, default=20.0)
+    p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
+    p.add_argument("--print_trace", action="store_true")
+    return p.parse_args()
      
 
 def write_content_to_file(file, content, header): 
@@ -48,12 +49,12 @@ if __name__ =="__main__":
     classData.SplitData()
 
     
-    with open(f"PKL_Saved_Files/margin1.5/GB/{args.dataset_name}_trained_model.pkl", "rb") as f:
+    with open(f"PKL_Saved_Files/margin1.5/RF/{args.dataset_name}_trained_model.pkl", "rb") as f:
         all_models = pickle.load(f,encoding='latin1')
         
    
-    x_path = f"PKL_Saved_Files/margin1.5/GB/{args.dataset_name}_X_test.npy"
-    y_path = f"PKL_Saved_Files/margin1.5/GB/{args.dataset_name}_y_test.npy"
+    x_path = f"PKL_Saved_Files/margin1.5/RF/{args.dataset_name}_X_test.npy"
+    y_path = f"PKL_Saved_Files/margin1.5/RF/{args.dataset_name}_y_test.npy"
 
     if os.path.exists(x_path) and os.path.exists(y_path):
         X_test = np.load(x_path, allow_pickle=True)
@@ -80,7 +81,7 @@ if __name__ =="__main__":
     all_result = TestBoardControlled(X_test=X_test,y_test=y_test,model=model,args=args,sensor_on=set_odr_Acc,sensor_sleep=set_sensor_off,fs_base=args.fs_base,window_len=window_len,sensor_wakeup_sec=0.0,print_trace=args.print_trace,)
 
     output_file = (
-        f"PKL_Saved_Files/margin1.5/GB/"
+        f"PKL_Saved_Files/margin1.5/RF/"
         f"{args.dataset_name}_accuracy_results.csv"
     )
 
@@ -152,6 +153,7 @@ if __name__ =="__main__":
 #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.47 ,0.59, 1])
 #     p.add_argument("--proportions", type=float, nargs="+", default=[0.3, 0.41 ,0.56, 1])   # split_points
 #     p.add_argument("--th_combination", type=float, nargs="+", default=[0.6931, 0.1732, 0.34657])    # th_list
+
 #     return p.parse_args()
 
 #    def parse_args():
