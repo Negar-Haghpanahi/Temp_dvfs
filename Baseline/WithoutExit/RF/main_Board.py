@@ -5,11 +5,11 @@ from sensor_control import init_sensor ,  set_odr_Acc ,set_sensor_off
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
+    p.add_argument("--dataset_name", type=str, default="ACCGyro")
     #p.add_argument("--n_est", type=int, default=80)
     #p.add_argument("--max_depth", type=int, default=30)
     
-    p.add_argument("--fs_base", type=float, default=50.0)
+    p.add_argument("--fs_base", type=float, default=250.0)
     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
     p.add_argument("--print_trace", action="store_true")
     
