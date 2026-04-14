@@ -1,7 +1,7 @@
 import pickle, os, time, argparse, csv, numpy as np
 from data_loader.ReadFile import LoadData
 from test_Board import Test
-from sensor_control import initialize_bmi160, sensor_on, sensor_sleep
+from sensor_control import init_sensor
 
 def parse_args():
     p = argparse.ArgumentParser()
@@ -52,7 +52,8 @@ if __name__ == "__main__":
 
 
 
-    initialize_bmi160()
+    init_sensor()
+    time.sleep(0.1)
 
     try:
         

@@ -1,7 +1,7 @@
 import time
 from feature_engineering import FeatureEngineer
 from sklearn.metrics import accuracy_score
-from sensor_control import initialize_bmi160, sensor_on, sensor_sleep
+from sensor_control import init_sensor ,set_odr_Acc ,set_sensor_off
 
 def Test(X_test, y_test, model, args):
     
@@ -17,8 +17,8 @@ def Test(X_test, y_test, model, args):
         
         
         t_start = time.time()
-        sensor_on(verbose=True)
-        time.sleep(window_time- 0.2 )
+        set_odr_Acc(1344)
+        time.sleep(window_time )
         
         
         X_test_feat = fe.extract_features(X_test[w:w+1])

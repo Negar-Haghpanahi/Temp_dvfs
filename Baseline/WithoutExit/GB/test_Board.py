@@ -1,7 +1,7 @@
 import time
 from feature_engineering import FeatureEngineer
 from sklearn.metrics import accuracy_score
-from sensor_control import initialize_bmi160, sensor_on, sensor_sleep
+from sensor_control import init_sensor ,set_odr_Acc ,set_sensor_off
 
 def Test(X_test, y_test, model, args):
     
@@ -9,19 +9,23 @@ def Test(X_test, y_test, model, args):
     all_results = []
 
     window_len = X_test.shape[2]
-    window_time =  3  #float(window_len) / float(args.fs_base)
+    window_time = 3  #float(window_len) / float(args.fs_base)
     
     fe = FeatureEngineer()
     for w in range(min(100 ,len(X_test))):
         print(f"w is --> {w}")
-        sensor_on(verbose=True)
+        
         
         t_start = time.time()
-        time.sleep(window_time)
+        set_odr_Acc(1344)
+        time.sleep(window_time )
+        
         
         X_test_feat = fe.extract_features(X_test[w:w+1])
-        pred = int( model.predict(X_test_feat)[0])
-        
+        t_before = time.time()
+        pred = int(model.predict(X_test_feat)[0])
+        t_after = time.time()
+        print("total time infernce is --> ", t_after-t_before)
      
         t_end = time.time()
         

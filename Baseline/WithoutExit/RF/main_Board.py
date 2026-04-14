@@ -1,7 +1,7 @@
 import pickle, os, time, argparse, csv, numpy as np
 from data_loader.ReadFile import LoadData
 from test_Board import Test
-from sensor_control import initialize_bmi160, sensor_on, sensor_sleep, auto_calibrate
+from sensor_control import init_sensor ,  set_odr_Acc ,set_sensor_off
 
 def parse_args():
     p = argparse.ArgumentParser()
@@ -52,10 +52,9 @@ if __name__ == "__main__":
 
 
 
-    initialize_bmi160()
+    init_sensor()
     time.sleep(0.1)
-    auto_calibrate()
-    time.sleep(0.1)
+
     try:
         
         all_result = Test(X_test, y_test, model, args)
