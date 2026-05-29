@@ -139,7 +139,6 @@ class RunInference:
             for stage_idx, stage_obj in enumerate(self.models):
                 seg_wait = float(self.stage_acq_times[stage_idx])
 
-                # 1. FIXED: Removed duplicate time.sleep call
                 if seg_wait > 0:
                     time.sleep(seg_wait)
 
@@ -185,13 +184,10 @@ class RunInference:
                         self.sensor_total_on_sec = t_sensor_off - t_sensor_on_start
                         sensor_is_on = False
 
-                    # 2. FIXED: Base remaining sleep on true absolute elapsed wall time 
-                    # (This subtracts all calculation overhead perfectly)
                     time_spent_so_far = time.time() - t_start_absolute
                     remaining_off_time = max(0.0, self.T_window - time_spent_so_far)
                     self.sensor_total_off_sec = remaining_off_time
 
-                    # 3. FIXED: Removed messy, duplicate subtraction blocks
                     if remaining_off_time > 0:
                         time.sleep(remaining_off_time)
 
