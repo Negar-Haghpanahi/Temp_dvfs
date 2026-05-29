@@ -13,6 +13,7 @@ class LoadData:
         self.labels_array = None
         self.n_window = None
         self.dataset_name = None
+        self.n_data = None
         
     def Read(self, datasetName=None):
     
@@ -37,7 +38,7 @@ class LoadData:
         self.labels_array = data_dict['labels']
 
         m, n = self.data.shape[::2]                                                      
-        self.n_window, n_channel, n_data = self.data.shape
+        self.n_window, n_channel, self.n_data = self.data.shape
 
     def _flatten_triaxial(self, X):
       
