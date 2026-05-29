@@ -211,3 +211,11 @@ class RunInference:
                     sensor_sleep()
                 except Exception:
                     pass 
+
+
+def predict_proba(self):
+        return self.stage_entropies, self.stage_predictions
+
+    def check_exit(self, sub_rf_entropy, threshold_list_of_keys, predictions, y_test, start_time):
+        result = self.run_window(threshold_list_of_keys=threshold_list_of_keys, start_time=start_time)
+        return [], [self.window_num], [], [result]
