@@ -26,7 +26,7 @@ def full_window_time_sec(window_len, fs_base):
 
 def stage_acquisition_times(split_points, window_len, fs_base):
     """Return incremental acquisition time for each stage."""
-    total_window_sec = 2 #full_window_time_sec(window_len, fs_base)
+    total_window_sec = full_window_time_sec(window_len, fs_base)
     prev = 0.0
     out = []
     for p in split_points:
@@ -98,15 +98,7 @@ class RunInference:
 
 
     def run_window(self, threshold_list_of_keys, start_time):
-        """
-        Sensor turns ON once at the beginning of the window.
-        For each stage:
-          1) wait only for the additional segment acquisition time
-          2) compute the stage prediction
-          3) check exit immediately
-          4) if exit happens, turn sensor OFF immediately
-          5) sleep the remaining part of the window with sensor OFF
-        """
+      
         t_start_absolute = float(start_time)
 
         result = {
@@ -140,7 +132,7 @@ class RunInference:
                 seg_wait = float(self.stage_acq_times[stage_idx])
 
                 if seg_wait > 0:
-                    time.sleep(seg_wait)
+                    time.sleep(seg_wait-0.01)    # added times off
 
                 t_compute_start = time.time()
 
@@ -185,7 +177,7 @@ class RunInference:
                         sensor_is_on = False
 
                     time_spent_so_far = time.time() - t_start_absolute
-                    remaining_off_time = max(0.0, self.T_window - time_spent_so_far)
+                    remaining_off_time = max(0.0, self.T_window - time_spent_so_far-0.01)   #added time off
                     self.sensor_total_off_sec = remaining_off_time
 
                     if remaining_off_time > 0:
@@ -213,7 +205,7 @@ class RunInference:
                     pass 
 
 
-def predict_proba(self):
+    def predict_proba(self):
         return self.stage_entropies, self.stage_predictions
 
     def check_exit(self, sub_rf_entropy, threshold_list_of_keys, predictions, y_test, start_time):
