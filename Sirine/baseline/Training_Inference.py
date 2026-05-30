@@ -50,7 +50,7 @@ def read_configuration_return_results(window_len, fs_base, dataset_name, sensor_
  
     list_of_inference_results = []
    
-    for w in range(len(X_test)):
+    for w in range(min(100, len(X_test))):
  
         sensor_on(verbose=True)
         time.sleep(T_window)
