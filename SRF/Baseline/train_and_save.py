@@ -7,7 +7,7 @@ from DataLoad import LoadData
 
 
 def Train_and_Save(dataset_name, n_estimators, tree_depth):
-    file_path = f'C:\\Users\\negar.haghpanahi\\OneDrive - Washington State University (email.wsu.edu)\\WSU\\Fall2025-Semster2\\Research\\DVFS\\Dynamic_Early_Exit\\CLONE-RSP0\\Temp_dvfs\\SRF\\Baseline\\Datasets\\{dataset_name}_dataLabels.pkl'
+    file_path = f'Baseline\\Datasets\\{dataset_name}_dataLabels.pkl'
     with open(file_path, 'rb') as f:
         data_dict = pickle.load(f)
 
@@ -30,23 +30,7 @@ def Train_and_Save(dataset_name, n_estimators, tree_depth):
     y_val   = loader.GetYval()
     y_test  = loader.GetYtest()
 
-    '''X_train_len = len(y_train)
-    X_val_len   = len(y_val)
-    X_test_len  = len(y_test)'''
-
-    '''# First split: 80% (Train + Validation) and 20% (Test)
-    X_temp, X_test_ind, l_temp, l_test = train_test_split(lst, labels_array, test_size=0.20, random_state=42)
-    X_train_ind, X_val_ind, l_train, l_val = train_test_split(X_temp, l_temp, test_size=0.25, random_state=42)  # 0.25 * 80% = 20%
-'''
-
-    '''# data
-    X_train = data[X_train_ind].reshape(len(X_train_ind), n_channel*n_data)
-    X_test =  data[X_test_ind].reshape(len(X_test_ind), n_channel*n_data)
-    #X_val = data[X_val_ind].reshape(len(X_val_ind), n_channel*n_data)
-
-    # labels
-    y_train = l_train
-    y_test = l_test'''
+   
 
     nb_clss = len(np.unique(y_train))
 
@@ -58,20 +42,20 @@ def Train_and_Save(dataset_name, n_estimators, tree_depth):
     
 
     # Save the model
-    with open(f"{dataset_name}_trained_model.pkl", "wb") as f:
+    with open(f"Baseline\\saved_pkl\\{dataset_name}_trained_model.pkl", "wb") as f:
         pickle.dump(clf,f)
 
     # Save the X_train and y_train and nb_classes
-    np.save(f"{dataset_name}_test_data.npy", X_test)
-    np.save(f"{dataset_name}_test_labels.npy", y_test) 
-    np.save(f"{dataset_name}_nb_classes.npy", np.array([nb_clss]))
+    np.save(f"Baseline\\saved_pkl\\{dataset_name}_test_data.npy", X_test)
+    np.save(f"Baseline\\saved_pkl\\{dataset_name}_test_labels.npy", y_test) 
+    np.save(f"Baseline\\saved_pkl\\{dataset_name}_nb_classes.npy", np.array([nb_clss]))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "RF-V Training")
-    parser.add_argument("--dataset_name", type=str, default= "EMGPhysical", help = "The Dataset name")
-    parser.add_argument("--n_est", type=int, default=40, help = "The number of estimators")
-    parser.add_argument("--max_depth", type=int, default=35, help = "The max depth")
+    parser.add_argument("--dataset_name", type=str, default= "SelfRegulationSCP1", help = "The Dataset name")
+    parser.add_argument("--n_est", type=int, default=19, help = "The number of estimators")
+    parser.add_argument("--max_depth", type=int, default=10, help = "The max depth")
     args = parser.parse_args()
     Train_and_Save(args.dataset_name, args.n_est, args.max_depth)
   

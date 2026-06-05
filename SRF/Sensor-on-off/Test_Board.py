@@ -4,13 +4,13 @@ from  sensor_control import initialize_bmi160 , sensor_on , sensor_sleep
 
 
 
-def Test(X_test, y_test, models, args, fs_base, window_len, split_points):
+def Test(list_windows ,X_test, y_test, models, args, fs_base, window_len, split_points):
     all_per_sample_results = []
 
-    n_windows = min(200, len(X_test))
+    n_windows = min(100, len(X_test))
 
-    for w in range(min(200 ,len(X_test))):
-        
+    # for w in range(min(200 ,len(X_test))):
+    for w in list_windows:
         start_time_inference = time.time()
 
         inference_obj = RunInference(
