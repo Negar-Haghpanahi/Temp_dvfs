@@ -21,7 +21,7 @@ def _predict_for_tree(args):
 
 
 def full_window_time_sec(window_len, fs_base):
-    return float(window_len) / float(fs_base)
+    return 4   #float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
@@ -132,7 +132,7 @@ class RunInference:
                 seg_wait = float(self.stage_acq_times[stage_idx])
 
                 if seg_wait > 0:
-                    time.sleep(seg_wait-0.01)    # added times off
+                    time.sleep(seg_wait-0.2)    # added times off
 
                 t_compute_start = time.time()
 
@@ -177,7 +177,7 @@ class RunInference:
                         sensor_is_on = False
 
                     time_spent_so_far = time.time() - t_start_absolute
-                    remaining_off_time = max(0.0, self.T_window - time_spent_so_far-0.01)   #added time off
+                    remaining_off_time = max(0.0, self.T_window - time_spent_so_far-0.2)   #added time off
                     self.sensor_total_off_sec = remaining_off_time
 
                     if remaining_off_time > 0:

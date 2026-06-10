@@ -31,9 +31,9 @@ def sensor_status():
 
 def sensor_on(verbose=True):
     write_register(BMI160_I2C_ADDR, 0x7E, 0x11)  # ACC_NORMAL_MODE
-    time.sleep(0.005)
+    time.sleep(0.1)
     write_register(BMI160_I2C_ADDR, 0x7E, 0x15)  # GYR_NORMAL_MODE
-    time.sleep(0.005)
+    time.sleep(0.1)
 
     if verbose:
         status, acc_mode, gyro_mode = sensor_status()
@@ -42,9 +42,9 @@ def sensor_on(verbose=True):
 
 def sensor_sleep(verbose=True):
     write_register(BMI160_I2C_ADDR, 0x7E, 0x10)  # ACC_SUSPEND
-    time.sleep(0.005)
+    time.sleep(0.1)
     write_register(BMI160_I2C_ADDR, 0x7E, 0x14)  # GYR_SUSPEND
-    time.sleep(0.005)
+    time.sleep(0.1)
 
     if verbose:
         status, acc_mode, gyro_mode = sensor_status()
