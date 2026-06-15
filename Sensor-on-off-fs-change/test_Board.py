@@ -2,7 +2,7 @@ import time
 
 
 def full_window_time_sec(window_len, fs_base):
-    return 0.82  #float(window_len) / float(fs_base)
+    return 4  #float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
@@ -31,7 +31,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
     for w in range(min(100,len(X_test))):
 
-        #print(f"window is-->  {w}")
+        print(f"window is-->  {w}")
         if print_trace:
             print("\n" + "=" * 60)
             print(f"Window {w}")
