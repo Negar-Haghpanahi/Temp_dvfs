@@ -84,6 +84,9 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             compute_sec = float(stage_info.get("stage_time_sec", 0.0))
             compute_total_sec += compute_sec
             executed_stages.append(stage_info)
+            
+            t_start_prediction = stage_info.get("t_start_prediction", 0.0)
+            t_end_prediction = stage_info.get("t_end_prediction", 0.0)
 
             if exit_now:
                 exit_level = int(k + 1)
@@ -125,6 +128,8 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             "sensor_total_on_sec": float(sensor_total_on_sec),
             "sensor_total_off_sec": float(remaining_off_time),
             "compute_total_sec": float(compute_total_sec),
+            "t_start_prediction": float(t_start_prediction),
+            "t_end_prediction": float(t_end_prediction),
             "true_label": int(y_test[w]),
             "prediction": int(pred),
             "correctness": int(int(pred) == int(y_test[w])),
