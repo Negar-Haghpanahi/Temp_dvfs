@@ -2,7 +2,7 @@ import time
 
 
 def full_window_time_sec(window_len, fs_base):
-    return 4  #float(window_len) / float(fs_base)
+    return 10  #float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
