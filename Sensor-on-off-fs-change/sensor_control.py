@@ -29,7 +29,7 @@ def write_reg_mag(reg, val):
 def read_fifo_chunked():
     addr = 0x28 | 0x80
     total_bytes = 144
-    chunk_size = 24
+    chunk_size = 30
     raw_data = []
 
     try:
@@ -64,12 +64,12 @@ def interrupt_handler():
     timestamp = time.time()
     batch = read_fifo_chunked()
     print("FIFO--------------")
-    if batch:
-        with open(CSV_FILE, mode='a', newline='') as f:
-            writer = csv.writer(f)
-            for x, y, z in batch:
-                writer.writerow([current_phase, timestamp, x, y, z])
-                sample_count += 1
+   # if batch:
+   #     with open(CSV_FILE, mode='a', newline='') as f:
+   #         writer = csv.writer(f)
+   #         for x, y, z in batch:
+   #             writer.writerow([current_phase, timestamp, x, y, z])
+   #             sample_count += 1
 
 def init_sensor():
     # Force mag to sleep
@@ -102,6 +102,7 @@ def set_odr_Acc(ODR):
     else:
        print("invalid ODR")
        return
+    write_reg(0x2E,0x00)
     write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
     write_reg(0x24, 0x40)      # FIFO_EN = 1
@@ -139,13 +140,15 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
 
 if __name__=="__main__":
  init_sensor()
- set_odr_Acc(100)
+ time.sleep(5)
+# set_odr_Acc(100)
 
- while True:
-   time.sleep(3)
-   set_odr_Acc(200)
-   time.sleep(3)
-   set_odr_Acc(100)
-   time.sleep(3)
-   set_sensor_off()
-   print("off")
+# while True:
+# time.sleep(5)
+ set_odr_Acc(400)
+ time.sleep(10)
+  # set_odr_Acc(1344)
+  # time.sleep(3)
+ set_sensor_off()
+ print("off")
+ time.sleep(10)
