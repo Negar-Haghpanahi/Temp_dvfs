@@ -10,7 +10,7 @@ print(time.time(), "start")
 # --- Configuration ---
 I2C_ADDR = 0x19          # LSM303DLHC accel
 MAG_ADDR = 0x1E          # LSM303DLHC mag
-INT1_GPIO = 23
+INT1_GPIO = 24
 CSV_FILE = "lsm303_data.csv"
 
 bus = smbus2.SMBus(1)
@@ -63,7 +63,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-
+    print("FIFO--------------")
     if batch:
         with open(CSV_FILE, mode='a', newline='') as f:
             writer = csv.writer(f)
@@ -82,6 +82,7 @@ def init_sensor():
     read_fifo_chunked()        # flush
 
 def set_odr_Acc(ODR):
+    print(" ODR: ", ODR)
     if ODR == 1:
        odr_reg_val=0x17
     elif ODR==10:
@@ -103,6 +104,10 @@ def set_odr_Acc(ODR):
        return
     write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
+    write_reg(0x24, 0x40)      # FIFO_EN = 1
+    write_reg(0x2E, 0x97)      # Stream mode, watermark = 24
+    write_reg(0x22, 0x04)      # Route watermark to INT1
+
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
 # --- Initialize CSV ---
@@ -110,6 +115,7 @@ with open(CSV_FILE, mode='w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
+    print("Sensor off")
     # Accelerometer: power down all axes
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
@@ -131,3 +137,15 @@ phase_buffer = []
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
 
+if __name__=="__main__":
+ init_sensor()
+ set_odr_Acc(100)
+
+ while True:
+   time.sleep(3)
+   set_odr_Acc(200)
+   time.sleep(3)
+   set_odr_Acc(100)
+   time.sleep(3)
+   set_sensor_off()
+   print("off")

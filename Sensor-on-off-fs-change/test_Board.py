@@ -35,7 +35,10 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
         if print_trace:
             print("\n" + "=" * 60)
             print(f"Window {w}")
-
+       
+        list_prediction_start= []
+        list_prediction_end = []
+      
         
         x_one = X_test[w:w + 1]
         x_acc = None
@@ -58,17 +61,20 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
 
         for k in range(num_exits):
             # keep sensor ON only for the NEW required segment time
-            sensor_on(1344)
+            sensor_on(100)
+#            print("sensor om with: 1344 ")
             seg_wait = float(acq_times[k])
 
             if print_trace:
                 print(f"  Stage {k+1}: sensor ON for new segment = {seg_wait:.6f} sec")
-            print("sensor on seg -- > " , seg_wait," exit num is --> " ,k)
+            #print("sensor on seg -- > " , seg_wait," exit num is --> " ,k)
             time.sleep(seg_wait)
             sensor_total_on_sec += seg_wait
             t_before = time.time()
+            list_prediction_start.append(t_before)
             pred, stage_info, x_acc, factor_next, H_prev, exit_now = model.predict_one_stage(
-                x_full_one=x_one,
+                            
+            x_full_one=x_one,
                 stage_idx=k,
                 x_acc=x_acc,
                 start_factor=start_factor_state,
@@ -79,6 +85,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             )
            
             t_after = time.time()
+            list_prediction_end.append(t_after)
             print("total time inferenec is --> ", t_after - t_before)
 
             compute_sec = float(stage_info.get("stage_time_sec", 0.0))
@@ -86,7 +93,10 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             executed_stages.append(stage_info)
             
             t_start_prediction = stage_info.get("t_start_prediction", 0.0)
+            print ("start prediction is  --> ", t_start_prediction)
             t_end_prediction = stage_info.get("t_end_prediction", 0.0)
+            print ("t_end is -->",  t_end_prediction )
+
 
             if exit_now:
                 exit_level = int(k + 1)
@@ -94,7 +104,7 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
                 remaining_off_time = max(0.0, T_window - sensor_total_on_sec)  # ****** add 0.2
                 #if remaining_off_time > 0 :
                 sensor_sleep()
-                print("sensor off  seg -- > " , remaining_off_time ," exit num is --> " ,k)
+                #print("sensor off  seg -- > " , remaining_off_time ," exit num is --> " ,k)
                 time.sleep(remaining_off_time)
                 if print_trace:
                     print(f"  -> EXIT at stage {exit_level}")
@@ -128,8 +138,8 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
             "sensor_total_on_sec": float(sensor_total_on_sec),
             "sensor_total_off_sec": float(remaining_off_time),
             "compute_total_sec": float(compute_total_sec),
-            "t_start_prediction": float(t_start_prediction),
-            "t_end_prediction": float(t_end_prediction),
+            "t_start_prediction": list_prediction_start,
+            "t_end_prediction": list_prediction_end,
             "true_label": int(y_test[w]),
             "prediction": int(pred),
             "correctness": int(int(pred) == int(y_test[w])),
