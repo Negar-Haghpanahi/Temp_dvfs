@@ -67,7 +67,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-#    print("FIFO--------------")
+    print("FIFO--------------")
 
 def init_sensor():
     # Force mag to sleep
