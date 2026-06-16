@@ -63,13 +63,13 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-    print("interupt----------------FIFO")
-    if batch:
-        with open(CSV_FILE, mode='a', newline='') as f:
-            writer = csv.writer(f)
-            for x, y, z in batch:
-                writer.writerow([current_phase, timestamp, x, y, z])
-                sample_count += 1
+#    print("interupt----------------FIFO")
+ #   if batch:
+  #      with open(CSV_FILE, mode='a', newline='') as f:
+   #         writer = csv.writer(f)
+    #        for x, y, z in batch:
+     #           writer.writerow([current_phase, timestamp, x, y, z])
+      #          sample_count += 1
 
 def init_sensor():
     # Force mag to sleep

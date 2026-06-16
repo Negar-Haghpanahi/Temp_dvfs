@@ -2,7 +2,6 @@ import pickle, os, time, argparse, csv, numpy as np
 from data_loader.ReadFile import LoadData
 from test_Board import Test
 
-
 import smbus2
 import csv
 import time
@@ -15,7 +14,7 @@ print(time.time(), "start")
 # --- Configuration ---
 I2C_ADDR = 0x19          # LSM303DLHC accel
 MAG_ADDR = 0x1E          # LSM303DLHC mag
-INT1_GPIO = 23
+INT1_GPIO = 24
 CSV_FILE = "lsm303_data.csv"
 
 bus = smbus2.SMBus(1)
@@ -107,6 +106,7 @@ def set_odr_Acc(ODR):
     else:
        print("invalid ODR")
        return
+    write_reg(0x2E,0x00)
     write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
     write_reg(0x24, 0x40)      # FIFO_EN = 1
@@ -141,6 +141,8 @@ phase_buffer = []
 
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
+
+
 
 
 def parse_args():
