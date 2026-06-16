@@ -158,7 +158,7 @@ def Test(X_test, y_test, model, args):
 #    time.sleep(0.1)
     fe = FeatureEngineer()
    # for w in range(min(100 ,len(X_test))):
-    for w in range(3):
+    for w in range(100):
         print(f"w is --> {w}")
         
         
