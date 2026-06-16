@@ -62,17 +62,6 @@ def read_fifo_chunked():
         print(f"I2C Error: {e}")
         return None
 
-def interrupt_handler():
-    global sample_count
-    timestamp = time.time()
-    batch = read_fifo_chunked()
-    print("FIFO--------------")
-#    if batch:
- #       with open(CSV_FILE, mode='a', newline='') as f:
-  #          writer = csv.writer(f)
-   #         for x, y, z in batch:
-    #            writer.writerow([current_phase, timestamp, x, y, z])
-     #           sample_count += 1
 
 def init_sensor():
     # Force mag to sleep
@@ -114,26 +103,13 @@ def set_odr_Acc(ODR):
 
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
-# --- Initialize CSV ---
-#with open(CSV_FILE, mode='w', newline='') as f:
-#    writer = csv.writer(f)
-#    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
     print("Sensor off")
     # Accelerometer: power down all axes
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
     write_reg_mag(0x02, 0x03)  # MR_REG_M = 0x03 → sleep
-# --- GPIO Setup ---
-#int_pin = Button(INT1_GPIO, pull_up=False)
-#int_pin.when_pressed = interrupt_handler
-#phase_buffer = []
 
-def log_phase_buffer(phase_name, start_ts, end_ts):
-    phase_buffer.append([phase_name, start_ts, end_ts])
-
-import csv
-import time
 
 # --- Buffer to store phase info ---
 phase_buffer = []

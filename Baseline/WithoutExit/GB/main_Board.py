@@ -67,13 +67,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-    print("FIFO--------------")
-#    if batch:
- #       with open(CSV_FILE, mode='a', newline='') as f:
-  #          writer = csv.writer(f)
-   #         for x, y, z in batch:
-    #            writer.writerow([current_phase, timestamp, x, y, z])
-     #           sample_count += 1
+#    print("FIFO--------------")
 
 def init_sensor():
     # Force mag to sleep
@@ -115,10 +109,6 @@ def set_odr_Acc(ODR):
 
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
-# --- Initialize CSV ---
-#with open(CSV_FILE, mode='w', newline='') as f:
-#    writer = csv.writer(f)
-#    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
     print("Sensor off")
     # Accelerometer: power down all axes
@@ -155,7 +145,6 @@ def parse_args():
     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
     p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
     p.add_argument("--th_combination", type=float, nargs="+", default=[0.44793, 1.34381, 0.89587])    # th_list
-    #         
     
     p.add_argument("--fs_base", type=float, default=50.0)
     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
