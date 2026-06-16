@@ -109,6 +109,11 @@ def set_sensor_off():
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
     write_reg_mag(0x02, 0x03)  # MR_REG_M = 0x03 → sleep
+def interrupt_handler():
+#    global sample_count
+    timestamp = time.time()
+    batch = read_fifo_chunked()
+    print("FIFO--------------")
 
 
 # --- Buffer to store phase info ---
@@ -120,20 +125,25 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
 
 
 def Test(X_test, y_test, model, args):
-    
+    int_pin = Button(INT1_GPIO, pull_up=False)
+    int_pin.when_pressed = interrupt_handler
+    phase_buffer = []    
 
     all_results = []
 
     window_len = X_test.shape[2]
     window_time = 10  #float(window_len) / float(args.fs_base)
-    
+    init_sensor()
+    set_odr_Acc(400)
+
     fe = FeatureEngineer()
-    for w in range(min(100 ,len(X_test))):
+   # for w in range(min(100 ,len(X_test))):
+    for w in range(10):
         print(f"w is --> {w}")
         
         
         t_start = time.time()
-        set_odr_Acc(400)
+#        set_odr_Acc(400)
         time.sleep(window_time )
         
         

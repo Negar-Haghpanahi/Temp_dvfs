@@ -64,7 +64,7 @@ def read_fifo_chunked():
         return None
 
 def interrupt_handler():
-    global sample_count
+#    global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
     print("FIFO--------------")
@@ -116,9 +116,9 @@ def set_sensor_off():
     # Magnetometer: sleep mode
     write_reg_mag(0x02, 0x03)  # MR_REG_M = 0x03 → sleep
 # --- GPIO Setup ---
-int_pin = Button(INT1_GPIO, pull_up=False)
-int_pin.when_pressed = interrupt_handler
-phase_buffer = []
+#int_pin = Button(INT1_GPIO, pull_up=False)
+#int_pin.when_pressed = interrupt_handler
+#phase_buffer = []
 
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
@@ -188,17 +188,15 @@ if __name__ == "__main__":
 
 
 
-    init_sensor()
-    time.sleep(0.1)
+ #   init_sensor()
+ #   time.sleep(0.1)
 
     try:
         
         all_result = Test(X_test, y_test, model, args)
 
     finally:
-        # sensor_sleep(verbose=True)
-        os.system("pkill -f 'python3 data-logger.py'")
-
+        print("end")
     output_file = f"PKL_Saved_Files/{args.dataset_name}_accuracy_results.csv"
 
     header = [
