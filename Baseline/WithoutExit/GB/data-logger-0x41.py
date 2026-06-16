@@ -14,7 +14,7 @@ ina.configure()
  
 header = ["time s","power mW"]
 
-filename = "PKL_Saved_Files/Shoaib_Power_Board.csv"
+filename = "PKL_Saved_Files/wisdm_Power_Board.csv"
 
 data_all = []
  
