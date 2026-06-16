@@ -1,6 +1,7 @@
 import time
 from feature_engineering import FeatureEngineer
 from sklearn.metrics import accuracy_score
+
 import smbus2
 import csv
 import time
@@ -62,6 +63,17 @@ def read_fifo_chunked():
         print(f"I2C Error: {e}")
         return None
 
+def interrupt_handler():
+    global sample_count
+    timestamp = time.time()
+    batch = read_fifo_chunked()
+    print("FIFO--------------")
+   # if batch:
+    #    with open(CSV_FILE, mode='a', newline='') as f:
+    #        writer = csv.writer(f)
+    #        for x, y, z in batch:
+    #            writer.writerow([current_phase, timestamp, x, y, z])
+    #            sample_count += 1
 
 def init_sensor():
     # Force mag to sleep
@@ -72,7 +84,6 @@ def init_sensor():
     write_reg(0x2E, 0x97)      # Stream mode, watermark = 24
     write_reg(0x22, 0x04)      # Route watermark to INT1
     read_fifo_chunked()        # flush
-#    set_odr_Acc(400)
 
 def set_odr_Acc(ODR):
     print(" ODR: ", ODR)
@@ -95,8 +106,7 @@ def set_odr_Acc(ODR):
     else:
        print("invalid ODR")
        return
- #   write_reg(0x2E,0x00)
- #   write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
+    write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
     write_reg(0x24, 0x40)      # FIFO_EN = 1
     write_reg(0x2E, 0x97)      # Stream mode, watermark = 24
@@ -104,24 +114,33 @@ def set_odr_Acc(ODR):
 
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
+# --- Initialize CSV ---
+with open(CSV_FILE, mode='w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
     print("Sensor off")
     # Accelerometer: power down all axes
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
     write_reg_mag(0x02, 0x03)  # MR_REG_M = 0x03 → sleep
-def interrupt_handler():
-#    global sample_count
-    timestamp = time.time()
-    batch = read_fifo_chunked()
-    print("FIFO--------------")
+# --- GPIO Setup ---
+#int_pin = Button(INT1_GPIO, pull_up=False)
+#int_pin.when_pressed = interrupt_handler
+#phase_buffer = []
 
+def log_phase_buffer(phase_name, start_ts, end_ts):
+    phase_buffer.append([phase_name, start_ts, end_ts])
+
+import csv
+import time
 
 # --- Buffer to store phase info ---
 phase_buffer = []
 
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
+
 
 
 
@@ -134,9 +153,9 @@ def Test(X_test, y_test, model, args):
 
     window_len = X_test.shape[2]
     window_time = 10  #float(window_len) / float(args.fs_base)
-    init_sensor()
-    set_odr_Acc(400)
-
+#    init_sensor()
+#    set_odr_Acc(400)
+#    time.sleep(0.1)
     fe = FeatureEngineer()
    # for w in range(min(100 ,len(X_test))):
     for w in range(3):

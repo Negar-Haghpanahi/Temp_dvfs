@@ -64,10 +64,16 @@ def read_fifo_chunked():
         return None
 
 def interrupt_handler():
-#    global sample_count
+    global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
     print("FIFO--------------")
+   # if batch:
+    #    with open(CSV_FILE, mode='a', newline='') as f:
+    #        writer = csv.writer(f)
+    #        for x, y, z in batch:
+    #            writer.writerow([current_phase, timestamp, x, y, z])
+    #            sample_count += 1
 
 def init_sensor():
     # Force mag to sleep
@@ -100,7 +106,6 @@ def set_odr_Acc(ODR):
     else:
        print("invalid ODR")
        return
-    write_reg(0x2E,0x00)
     write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
     write_reg(0x24, 0x40)      # FIFO_EN = 1
@@ -109,6 +114,10 @@ def set_odr_Acc(ODR):
 
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
+# --- Initialize CSV ---
+with open(CSV_FILE, mode='w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
     print("Sensor off")
     # Accelerometer: power down all axes
@@ -131,8 +140,6 @@ phase_buffer = []
 
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
-
-
 
 
 def parse_args():
@@ -188,8 +195,8 @@ if __name__ == "__main__":
 
 
 
- #   init_sensor()
- #   time.sleep(0.1)
+    init_sensor()
+    time.sleep(0.1)
 
     try:
         
