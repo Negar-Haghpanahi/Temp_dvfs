@@ -10,7 +10,7 @@ print(time.time(), "start")
 # --- Configuration ---
 I2C_ADDR = 0x19          # LSM303DLHC accel
 MAG_ADDR = 0x1E          # LSM303DLHC mag
-INT1_GPIO = 23
+INT1_GPIO = 24
 CSV_FILE = "lsm303_data.csv"
 
 bus = smbus2.SMBus(1)
@@ -63,7 +63,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-
+    print("interupt----------------FIFO")
     if batch:
         with open(CSV_FILE, mode='a', newline='') as f:
             writer = csv.writer(f)

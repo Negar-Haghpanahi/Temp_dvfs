@@ -9,7 +9,7 @@ def Test(X_test, y_test, model, args):
     all_results = []
 
     window_len = X_test.shape[2]
-    window_time = 0.82  #float(window_len) / float(args.fs_base)
+    window_time = 4  #float(window_len) / float(args.fs_base)
     
     fe = FeatureEngineer()
     for w in range(min(100 ,len(X_test))):
@@ -17,7 +17,7 @@ def Test(X_test, y_test, model, args):
         
         
         t_start = time.time()
-        set_odr_Acc(1344)
+        set_odr_Acc(100)
         time.sleep(window_time )
         
         
@@ -36,6 +36,8 @@ def Test(X_test, y_test, model, args):
             "window_sched_sec": float(window_time),
             "sensor_total_on_sec": float(window_time),
             "sensor_total_off_sec": 0.0,
+            "t_start_predict" : t_before,
+            "t_end_predict" : t_after,
             "true_label": int(y_test[w]),
             "prediction": int(pred),
             "correctness": int(pred == int(y_test[w])),
