@@ -72,6 +72,7 @@ def init_sensor():
     write_reg(0x2E, 0x97)      # Stream mode, watermark = 24
     write_reg(0x22, 0x04)      # Route watermark to INT1
     read_fifo_chunked()        # flush
+#    set_odr_Acc(400)
 
 def set_odr_Acc(ODR):
     print(" ODR: ", ODR)
@@ -94,8 +95,8 @@ def set_odr_Acc(ODR):
     else:
        print("invalid ODR")
        return
-    write_reg(0x2E,0x00)
-    write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
+ #   write_reg(0x2E,0x00)
+ #   write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
     write_reg(0x24, 0x40)      # FIFO_EN = 1
     write_reg(0x2E, 0x97)      # Stream mode, watermark = 24
@@ -125,9 +126,9 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
 
 
 def Test(X_test, y_test, model, args):
-    int_pin = Button(INT1_GPIO, pull_up=False)
-    int_pin.when_pressed = interrupt_handler
-    phase_buffer = []    
+#    int_pin = Button(INT1_GPIO, pull_up=False)
+#    int_pin.when_pressed = interrupt_handler
+#    phase_buffer = []    
 
     all_results = []
 
@@ -138,12 +139,12 @@ def Test(X_test, y_test, model, args):
 
     fe = FeatureEngineer()
    # for w in range(min(100 ,len(X_test))):
-    for w in range(10):
+    for w in range(3):
         print(f"w is --> {w}")
         
         
         t_start = time.time()
-#        set_odr_Acc(400)
+        set_odr_Acc(400)
         time.sleep(window_time )
         
         

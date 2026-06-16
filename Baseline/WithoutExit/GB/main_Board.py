@@ -116,9 +116,9 @@ def set_sensor_off():
     # Magnetometer: sleep mode
     write_reg_mag(0x02, 0x03)  # MR_REG_M = 0x03 → sleep
 # --- GPIO Setup ---
-#int_pin = Button(INT1_GPIO, pull_up=False)
-#int_pin.when_pressed = interrupt_handler
-#phase_buffer = []
+int_pin = Button(INT1_GPIO, pull_up=False)
+int_pin.when_pressed = interrupt_handler
+phase_buffer = []
 
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
