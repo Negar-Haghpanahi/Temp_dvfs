@@ -11,7 +11,7 @@ print(time.time(), "start")
 I2C_ADDR = 0x19          # LSM303DLHC accel
 MAG_ADDR = 0x1E          # LSM303DLHC mag
 INT1_GPIO = 24
-CSV_FILE = "lsm303_data.csv"
+#CSV_FILE = "lsm303_data.csv"
 
 bus = smbus2.SMBus(1)
 
@@ -63,7 +63,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-    print("FIFO--------------")
+ #   print("FIFO--------------")
    # if batch:
    #     with open(CSV_FILE, mode='a', newline='') as f:
    #         writer = csv.writer(f)
@@ -112,9 +112,9 @@ def set_odr_Acc(ODR):
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
 # --- Initialize CSV ---
-with open(CSV_FILE, mode='w', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
+#with open(CSV_FILE, mode='w', newline='') as f:
+#    writer = csv.writer(f)
+#    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
     print("Sensor off")
     # Accelerometer: power down all axes
@@ -146,7 +146,7 @@ if __name__=="__main__":
 # while True:
 # time.sleep(5)
  set_odr_Acc(400)
- time.sleep(10)
+ time.sleep(15)
   # set_odr_Acc(1344)
   # time.sleep(3)
  set_sensor_off()
