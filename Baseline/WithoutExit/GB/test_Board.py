@@ -17,7 +17,7 @@ def Test(X_test, y_test, model, args):
         
         
         t_start = time.time()
-        set_odr_Acc(200)
+        set_odr_Acc(1344)
         time.sleep(window_time )
         
         
