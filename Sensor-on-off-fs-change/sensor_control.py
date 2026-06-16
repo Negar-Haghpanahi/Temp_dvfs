@@ -63,7 +63,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
- #   print("FIFO--------------")
+    print("FIFO--------------")
    # if batch:
    #     with open(CSV_FILE, mode='a', newline='') as f:
    #         writer = csv.writer(f)
@@ -140,13 +140,13 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
 
 if __name__=="__main__":
  init_sensor()
- time.sleep(5)
+ time.sleep(10)
 # set_odr_Acc(100)
 
 # while True:
 # time.sleep(5)
  set_odr_Acc(400)
- time.sleep(15)
+ time.sleep(10)
   # set_odr_Acc(1344)
   # time.sleep(3)
  set_sensor_off()
