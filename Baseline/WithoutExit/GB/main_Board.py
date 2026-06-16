@@ -116,9 +116,9 @@ def set_odr_Acc(ODR):
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
 # --- Initialize CSV ---
-with open(CSV_FILE, mode='w', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
+#with open(CSV_FILE, mode='w', newline='') as f:
+#    writer = csv.writer(f)
+#    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
     print("Sensor off")
     # Accelerometer: power down all axes

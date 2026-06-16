@@ -12,7 +12,7 @@ ina = INA219(SHUNT_OHMS,address = 0x41 , busnum=1)
 
 ina.configure()
  
-header = ["time s","Current_mA","Voltage_V","power mW"]
+header = ["time s","power mW"]
 
 filename = "PKL_Saved_Files/Shoaib_Power_Board.csv"
 
@@ -39,8 +39,8 @@ with open(filename, 'w', newline='') as csvfile:
         data = []
 
         data.append(t)
-        data.append(A)
-        data.append(v)
+#        data.append(A)
+#        data.append(v)
         data.append(p)
  
  
