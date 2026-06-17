@@ -1,7 +1,3 @@
-import time
-from feature_engineering import FeatureEngineer
-from sklearn.metrics import accuracy_score
-
 import smbus2
 import csv
 import time
@@ -67,13 +63,13 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-    print("FIFO--------------")
-   # if batch:
-    #    with open(CSV_FILE, mode='a', newline='') as f:
-    #        writer = csv.writer(f)
+#    print("interupt----------------FIFO")
+ #   if batch:
+  #      with open(CSV_FILE, mode='a', newline='') as f:
+   #         writer = csv.writer(f)
     #        for x, y, z in batch:
-    #            writer.writerow([current_phase, timestamp, x, y, z])
-    #            sample_count += 1
+     #           writer.writerow([current_phase, timestamp, x, y, z])
+      #          sample_count += 1
 
 def init_sensor():
     # Force mag to sleep
@@ -86,7 +82,6 @@ def init_sensor():
     read_fifo_chunked()        # flush
 
 def set_odr_Acc(ODR):
-    print(" ODR: ", ODR)
     if ODR == 1:
        odr_reg_val=0x17
     elif ODR==10:
@@ -108,10 +103,6 @@ def set_odr_Acc(ODR):
        return
     write_reg_mag(0x02, 0x00)  # MR_REG_M: normal mode
     write_reg(0x20, odr_reg_val)
-    write_reg(0x24, 0x40)      # FIFO_EN = 1
-    write_reg(0x2E, 0x97)      # Stream mode, watermark = 24
-    write_reg(0x22, 0x04)      # Route watermark to INT1
-
 def set_odr_mag(odr_reg_val):
     write_reg(0x00, odr_reg_val)
 # --- Initialize CSV ---
@@ -119,15 +110,14 @@ with open(CSV_FILE, mode='w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
-    print("Sensor off")
     # Accelerometer: power down all axes
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
     write_reg_mag(0x02, 0x03)  # MR_REG_M = 0x03 → sleep
 # --- GPIO Setup ---
-#int_pin = Button(INT1_GPIO, pull_up=False)
-#int_pin.when_pressed = interrupt_handler
-#phase_buffer = []
+int_pin = Button(INT1_GPIO, pull_up=False)
+int_pin.when_pressed = interrupt_handler
+phase_buffer = []
 
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
@@ -141,58 +131,3 @@ phase_buffer = []
 def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
 
-
-
-
-def Test(X_test, y_test, model, args):
-#    int_pin = Button(INT1_GPIO, pull_up=False)
-#    int_pin.when_pressed = interrupt_handler
-#    phase_buffer = []    
-
-    all_results = []
-
-    window_len = X_test.shape[2]
-    window_time = 10  #float(window_len) / float(args.fs_base)
-#    init_sensor()
-#    set_odr_Acc(400)
-#    time.sleep(0.1)
-    fe = FeatureEngineer()
-   # for w in range(min(100 ,len(X_test))):
-    for w in range(100):
-        print(f"w is --> {w}")
-        
-        
-        t_start = time.time()
-        set_odr_Acc(400)
-        time.sleep(window_time )
-        
-        
-        X_test_feat = fe.extract_features(X_test[w:w+1])
-        t_before = time.time()
-        pred = int(model.predict(X_test_feat)[0])
-        t_after = time.time()
-        print("total time infernce is --> ", t_after-t_before)
-     
-        t_end = time.time()
-        
-        row = {
-            "t_start": float(t_start),
-            "t_end": float(t_end),
-            "total": float(t_end - t_start),
-            "window_sched_sec": float(window_time),
-            "sensor_total_on_sec": float(window_time),
-            "sensor_total_off_sec": 0.0,
-            "t_start_predict" : t_before,
-            "t_end_predict" : t_after,
-            "true_label": int(y_test[w]),
-            "prediction": int(pred),
-            "correctness": int(pred == int(y_test[w])),
-            "exit_level": 1,
-            "window_num": int(w),
-            "data%": 100.0
-        }
-
-
-        all_results.append(row)
-
-    return all_results

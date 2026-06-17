@@ -152,7 +152,7 @@ class DynamicEarlyExitRF:
             
             
      
-    def predict_one_stage(self, t_start_prediction, x_full_one, stage_idx, x_acc=None, start_factor=None, factor_next=None, H_prev=None, sample_id=-1, print_trace=False):
+    def predict_one_stage(self, x_full_one, stage_idx, x_acc=None, start_factor=None, factor_next=None, H_prev=None, sample_id=-1, print_trace=False):
         """
         Run exactly one stage, so board code can control sensor ON/OFF outside.
         """
@@ -221,9 +221,9 @@ class DynamicEarlyExitRF:
             "continued_with_factor": continued_with_factor,
             "margin": float(m),
             "gamma": None if gamma is None else float(gamma),
-            "stage_time_sec": float(stage_time_sec),
-            "t_start_prediction": float(t_start_prediction),
-            "t_end_prediction": float(stage_t1),
+            "stage_time_sec": float(stage_time_sec)
+           # "t_start_prediction": float(t_start_prediction),
+           # "t_end_prediction": float(stage_t1),
         }
 
         if print_trace:

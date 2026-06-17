@@ -1,6 +1,6 @@
 import pickle, os, time, argparse, csv, numpy as np
 from data_loader.ReadFile import LoadData
-from test_Board import Test
+from test_Board_2 import Test
 
 import smbus2
 import csv
@@ -144,15 +144,16 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--dataset_name", type=str, default="wisdm")
-    p.add_argument("--n_est", type=int, default=120)
-    p.add_argument("--max_depth", type=int, default=5)
-    p.add_argument("--num_exits", type=int, default=4)
 
-    p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
-    p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
-    p.add_argument("--th_combination", type=float, nargs="+", default=[0.44793, 1.34381, 0.89587])    # th_list
-    
+    p.add_argument("--dataset_name", type=str, default="wisdm")
+    p.add_argument("--n_est", type=int, default=60)
+    p.add_argument("--max_depth", type=int, default=15)
+    p.add_argument("--num_exits", type=int, default=2)
+
+    p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33 , 1.0])
+    p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
+    p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
+#         
     p.add_argument("--fs_base", type=float, default=50.0)
     p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
     p.add_argument("--print_trace", action="store_true")

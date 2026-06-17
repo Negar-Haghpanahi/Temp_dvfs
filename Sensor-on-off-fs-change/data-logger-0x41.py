@@ -8,13 +8,13 @@ import csv
 
 SHUNT_OHMS = 0.1
 
-ina = INA219(SHUNT_OHMS, busnum=1)
+ina = INA219(SHUNT_OHMS,address = 0x41 , busnum=1)
 
 ina.configure()
  
-header = ["time s", "power mW"]
+header = ["time s","Current_mA","Voltage_V","power mW"]
 
-filename = "PKL_Saved_Files/margin1.5/GB/Shoaib_Power_sensor.csv"
+filename = "PKL_Saved_Files/margin1.5/RF/wisdm_Power_Board.csv"
 
 data_all = []
  
@@ -33,12 +33,14 @@ with open(filename, 'w', newline='') as csvfile:
 
         #print(p)
 
-        #print(ina.voltage())
+        v=ina.voltage()
+        A=ina.current()
 
         data = []
 
         data.append(t)
-
+        data.append(A)
+        data.append(v)
         data.append(p)
  
  
