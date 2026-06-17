@@ -8,13 +8,13 @@ import csv
 
 SHUNT_OHMS = 0.1
 
-ina = INA219(SHUNT_OHMS, busnum=1)
+ina = INA219(SHUNT_OHMS,address=0x41, busnum=1)
 
 ina.configure()
  
 header = ["time s", "power mW"]
 
-filename = "PKL_Saved_Files/ACCGyro_Power.csv"
+filename = "PKL_Saved_Files/RF_wisdm_Power.csv"
 
 
 
