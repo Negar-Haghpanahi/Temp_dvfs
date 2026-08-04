@@ -82,7 +82,7 @@ def init_sensor():
     read_fifo_chunked()        # flush
 
 def set_odr_Acc(ODR):
-    print(" ODR: ", ODR)
+   # print(" ODR: ", ODR)
     if ODR == 1:
        odr_reg_val=0x17
     elif ODR==10:
@@ -116,7 +116,7 @@ def set_odr_mag(odr_reg_val):
 #    writer = csv.writer(f)
 #    writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
-    print("Sensor off")
+    #print("Sensor off")
     # Accelerometer: power down all axes
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
@@ -139,16 +139,16 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
     phase_buffer.append([phase_name, start_ts, end_ts])
 
 if __name__=="__main__":
- init_sensor()
- time.sleep(10)
+# init_sensor()
+# time.sleep(10)
 # set_odr_Acc(100)
 
 # while True:
 # time.sleep(5)
- set_odr_Acc(400)
- time.sleep(10)
+# set_odr_Acc(400)
+# time.sleep(10)
   # set_odr_Acc(1344)
   # time.sleep(3)
- set_sensor_off()
- print("off")
- time.sleep(10)
+# set_sensor_off()
+# print("off")
+# time.sleep(10)

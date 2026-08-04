@@ -68,7 +68,7 @@ def interrupt_handler():
     global sample_count
     timestamp = time.time()
     batch = read_fifo_chunked()
-    print("FIFO--------------")
+#    print("FIFO--------------")
    # if batch:
     #    with open(CSV_FILE, mode='a', newline='') as f:
     #        writer = csv.writer(f)
@@ -87,7 +87,7 @@ def init_sensor():
     read_fifo_chunked()        # flush
 
 def set_odr_Acc(ODR):
-    print(" ODR: ", ODR)
+#    print(" ODR: ", ODR)
     if ODR == 1:
        odr_reg_val=0x17
     elif ODR==10:
@@ -120,7 +120,7 @@ with open(CSV_FILE, mode='w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(["phase", "timestamp", "x_ms2", "y_ms2", "z_ms2"])
 def set_sensor_off():
-    print("Sensor off")
+ #   print("Sensor off")
     # Accelerometer: power down all axes
     write_reg(0x20, 0x00)  # CTRL_REG1_A = 0 → all axes off
     # Magnetometer: sleep mode
@@ -146,15 +146,15 @@ def log_phase_buffer(phase_name, start_ts, end_ts):
 def parse_args():
      
      p = argparse.ArgumentParser()
-
-     p.add_argument("--dataset_name", type=str, default="wisdm")
+     p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
      p.add_argument("--n_est", type=int, default=60)
      p.add_argument("--max_depth", type=int, default=15)
      p.add_argument("--num_exits", type=int, default=2)
 
-     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33 , 1.0])
-     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1.0])   # split_points
-     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])   
+     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.33,  1])
+     p.add_argument("--proportions", type=float, nargs="+", default=[0.34, 1])   # split_points
+     p.add_argument("--th_combination", type=float, nargs="+", default=[1.0397207708399179])    # th_list
+#          
      p.add_argument("--fs_base", type=float, default=250.0)
      p.add_argument("--sensor_wakeup_sec", type=float, default=0.0)
      p.add_argument("--print_trace", action="store_true")

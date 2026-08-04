@@ -2,7 +2,7 @@ import time
 
 
 def full_window_time_sec(window_len, fs_base):
-    return 10  #float(window_len) / float(fs_base)
+    return 3  #float(window_len) / float(fs_base)
 
 
 def stage_acquisition_times(split_points, window_len, fs_base):
@@ -86,16 +86,16 @@ def TestBoardControlled(X_test,y_test,model, args,sensor_on,sensor_sleep,fs_base
            
             t_after = time.time()
             list_prediction_end.append(t_after)
-            print("total time inferenec is --> ", t_after - t_before)
+     #       print("total time inferenec is --> ", t_after - t_before)
 
             compute_sec = float(stage_info.get("stage_time_sec", 0.0))
             compute_total_sec += compute_sec
             executed_stages.append(stage_info)
             
             t_start_prediction = stage_info.get("t_start_prediction", 0.0)
-            print ("start prediction is  --> ", t_start_prediction)
+      #      print ("start prediction is  --> ", t_start_prediction)
             t_end_prediction = stage_info.get("t_end_prediction", 0.0)
-            print ("t_end is -->",  t_end_prediction )
+       #     print ("t_end is -->",  t_end_prediction )
 
 
             if exit_now:
