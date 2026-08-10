@@ -148,7 +148,7 @@ class LoadData:
             print("Final y shape:", self.labels_array.shape)
             
         elif dataset_name == 'ACCGyro':   
-            CSV_PATH = r"data_loader//Datasets//accelerometer_gyro_mobile_phone_dataset.csv"   # <-- change this
+            CSV_PATH = r"data_loader\\Datasets\\accelerometer_gyro_mobile_phone_dataset.csv"   # <-- change this
             WINDOW_SIZE = 128
             STRIDE = 64   # overlap allowed
 

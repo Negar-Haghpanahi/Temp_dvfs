@@ -12,10 +12,9 @@ logger = setup_logger("TrainSaveBoard")
 
 def parse_args():
         p = argparse.ArgumentParser()
-        p.add_argument("--dataset_name", type=str, default="wisdm")
-        p.add_argument("--n_est", type=int, default=120)
+        p.add_argument("--dataset_name", type=str, default="Shoaib")
+        p.add_argument("--n_est", type=int, default=200)
         p.add_argument("--max_depth", type=int, default=5)
-
         return p.parse_args()
 
 if __name__ == "__main__":
@@ -57,7 +56,7 @@ if __name__ == "__main__":
 
     models_info = []
  
-    model_size_info = None
+    # model_size_info = None
     try:
         logger.info("Model size summary:")
         logger.info(f"  Total Nodes: {model_size_info['total_nodes']:,}")
@@ -126,10 +125,10 @@ if __name__ == "__main__":
     
     # def parse_args():
 #     p = argparse.ArgumentParser()
-#     p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
-#     p.add_argument("--n_est", type=int, default=120)
-#     p.add_argument("--max_depth", type=int, default=5)
-#     p.add_argument("--num_exits", type=int, default=4)
+    # p.add_argument("--dataset_name", type=str, default="wharDataOriginal")
+    # p.add_argument("--n_est", type=int, default=120)
+    # p.add_argument("--max_depth", type=int, default=5)
+    # p.add_argument("--num_exits", type=int, default=4)
 
 #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
 #     p.add_argument("--proportions", type=float, nargs="+", default=[0.35, 0.47, 0.61, 1])   # split_points
@@ -139,9 +138,9 @@ if __name__ == "__main__":
 
 # def parse_args():
 #     p = argparse.ArgumentParser()
-#     p.add_argument("--dataset_name", type=str, default="ACCGyro")
-#     p.add_argument("--n_est", type=int, default=150)
-#     p.add_argument("--max_depth", type=int, default=4)
+    # p.add_argument("--dataset_name", type=str, default="ACCGyro")
+    # p.add_argument("--n_est", type=int, default=150)
+    # p.add_argument("--max_depth", type=int, default=4)
 #     p.add_argument("--num_exits", type=int, default=4)
 #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.47 ,0.59, 1])
 #     p.add_argument("--proportions", type=float, nargs="+", default=[0.3, 0.41 ,0.56, 1])   # split_points
@@ -162,9 +161,9 @@ if __name__ == "__main__":
     
     #  def parse_args():
     #     p = argparse.ArgumentParser()
-    #     p.add_argument("--dataset_name", type=str, default="Shoaib")
-    #     p.add_argument("--n_est", type=int, default=200)
-    #     p.add_argument("--max_depth", type=int, default=5)
+        # p.add_argument("--dataset_name", type=str, default="Shoaib")
+        # p.add_argument("--n_est", type=int, default=200)
+        # p.add_argument("--max_depth", type=int, default=5)
     #     p.add_argument("--num_exits", type=int, default=4)
 
     #     p.add_argument("--tree_splits", type=float, nargs="+", default=[0.32, 0.48, 0.59, 1])
