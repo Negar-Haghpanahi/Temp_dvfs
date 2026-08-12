@@ -145,6 +145,8 @@ class DynamicEarlyExitRF:
 
             stage_params = dict(self.rf_params)
             stage_params["n_estimators"] = self.number_of_tress_per_forest[k]
+            stage_params["max_leaf_nodes"] = 285
+            stage_params["min_samples_leaf"] = 3
 
             rf = RandomForestClassifier(**stage_params)
             rf.fit(X_stage, y_stage)
@@ -256,7 +258,7 @@ class DynamicEarlyExitRF:
         H_prev = None
         t_start_prediction = time.time()
         for k in range(K):
-            pred, stage_info, x_acc, factor_next, H_prev, exit_now = self.predict_one_stage(t_start_prediction=t_start_prediction,
+            pred, stage_info, x_acc, factor_next, H_prev, exit_now = self.predict_one_stage(
                 x_full_one=x_full_one,
                 stage_idx=k,
                 x_acc=x_acc,

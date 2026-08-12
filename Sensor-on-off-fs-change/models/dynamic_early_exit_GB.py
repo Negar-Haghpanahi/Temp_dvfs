@@ -130,6 +130,8 @@ class DynamicEarlyExitRF:
 
             stage_params = dict(self.rf_params)              # keep name the same
             stage_params["n_estimators"] = self.number_of_tress_per_forest[k]
+            stage_params["max_leaf_nodes"] =6
+            stage_params["min_samples_leaf"] = 3
 
             gb = GradientBoostingClassifier(**stage_params)  # <-- CHANGED
             gb.fit(X_stage, y_stage)
